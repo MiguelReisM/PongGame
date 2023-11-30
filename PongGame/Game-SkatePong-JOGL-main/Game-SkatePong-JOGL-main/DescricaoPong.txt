@@ -1,0 +1,26 @@
+Skate Pong
+----------
+
+Como executar o jogo: 
+
+Execute o arquivo SkatePong.jar localizado em "SkatePong">"dist" ou abra o projeto do jogo em sua IDE (preferência Netbeans 17), abra o pacote Pong.cena e execute o arquivo class "Renderer.java".
+(Inclua a biblioteca do JOGL (dentro de dist>lib) no projeto e deixe a versão do java 19 ou a mais atualizada)
+----------
+
+Como jogar:
+
+Regras do jogo:
+- A bola deve colidir com skate.     
+- Você começa com 5 vidas.
+- Se a bola não colidir, uma vida será perdida.
+- Ganhe 20 pontos a cada colisão.
+- Some 200 pontos e passe para a 2° fase.
+- Na 2° fase, a velocidade é aumentada, a esfera colide com a lua e a pontuação é infinita.
+
+Botões: 
+- "A", "D", seta esquerda e direita: Movem o skate.
+- "P": Pausa o jogo.
+- "S": Volta para o menu.
+- "J": Start do jogo.
+- "F" : Fecha o jogo.
+        
