@@ -33,6 +33,7 @@ public class Cenarios {
     public void drawCenario3(GL2 gl, GLUT glut) {
         desenhaCampo2Fase(gl);
         desenhaCeu2Fase(gl, glut);
+        drawLua(gl, glut);
     }
 
     // Método para desenhar cenário do fim do jogo
@@ -65,7 +66,7 @@ public class Cenarios {
     public void desenhaCampo2Fase(GL2 gl) {
         // Desenha um campo mais escuro
         gl.glPushMatrix();
-        gl.glColor3f(0, 0.1f, 0);
+        gl.glColor3f(0.0f, 0.5f, 0.0f); // Cor verde
         gl.glBegin(GL2.GL_QUADS);
         gl.glVertex2f(-200 * this.aspect, -81.6f * this.aspect);
         gl.glVertex2f(-200 * this.aspect, -20 * this.aspect);
@@ -98,7 +99,7 @@ public class Cenarios {
         // Desenha estrelas brancas no céu
         gl.glColor3f(1.0f, 1.0f, 1.0f); // Cor branca para estrelas
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 25; i++) {
             float x = (float) (Math.random() * 400 * this.aspect) - 200 * this.aspect;
             float y = (float) (Math.random() * 200 * this.aspect) - 100 * this.aspect;
 
@@ -111,21 +112,31 @@ public class Cenarios {
         // Configuração da iluminação para os planetas
         configurarIluminacao(gl);
 
-        // Desenha planetas estáticos
-        drawPlanet(gl, glut, -150 * this.aspect, 20, 5 * this.aspect, 0.7f, 0.7f, 0.7f); // Mercúrio
-        drawPlanet(gl, glut, -100 * this.aspect, 40, 8 * this.aspect, 1.0f, 0.7f, 0.2f); // Vênus
-        drawPlanet(gl, glut, -50 * this.aspect, -70, 8 * this.aspect, 0.2f, 0.2f, 1.0f); // Terra
-        drawPlanet(gl, glut, 0, -10, 7 * this.aspect, 1.0f, 0.4f, 0.4f); // Marte
-        drawPlanet(gl, glut, 50 * this.aspect, 30, 20 * this.aspect, 0.8f, 0.5f, 0.2f); // Júpiter
+        // Fatores de escala para representar tamanhos reais dos planetas (em relação à Terra)
+        float escalaMercurio = 0.383f;
+        float escalaVenus = 0.949f;
+        float escalaTerra = 1.0f; // Tamanho da Terra mantido como referência
+        float escalaMarte = 0.532f;
+        float escalaJupiter = 5.0f;
+        float escalaSaturno = 4.0f;
+        float escalaUrano = 2.0f;
+        float escalaNetuno = 1.8f;
 
-        // Desenha anéis para a Terra (semelhantes aos de Saturno)
-        drawRings(gl, glut, -50 * this.aspect, -70, 8 * this.aspect);
+        // Desenha planetas estáticos do sistema solar (excluindo o Sol)
+        drawPlanet(gl, glut, -100 * this.aspect, 20, escalaMercurio * 5 * this.aspect, 0.7f, 0.7f, 0.7f); // Mercúrio
+        drawPlanet(gl, glut, -80 * this.aspect, 90, escalaVenus * 5 * this.aspect, 0.9f, 0.5f, 0.2f);    // Vênus
+        drawPlanet(gl, glut, -70 * this.aspect, -70, escalaTerra * 7 * this.aspect, 0.2f, 0.2f, 1.0f);   // Terra
+        drawPlanet(gl, glut, -50, 90, escalaMarte * 6 * this.aspect, 1.0f, 0.4f, 0.4f);                   // Marte
+        drawPlanet(gl, glut, 20 * this.aspect, 20, escalaSaturno * 5 * this.aspect, 0.8f, 0.8f, 0.7f); // Saturno
+        drawPlanet(gl, glut, 60 * this.aspect, -80, escalaUrano * 5 * this.aspect, 0.5f, 0.8f, 0.8f);     // Urano
+        drawPlanet(gl, glut, 100 * this.aspect, 50, escalaNetuno * 5 * this.aspect, 0.2f, 0.4f, 0.8f);   // Netuno
+
+        // Desenha anéis para Terra
+        drawRings(gl, glut, -70 * this.aspect, -70, escalaSaturno * 7 * this.aspect);
+
 
         // Desativa a iluminação ao finalizar o desenho
         desativarIluminacao(gl);
-
-        // Desenha outros elementos, como a lua
-        drawLua(gl, glut);
 
         gl.glFlush();
     }
@@ -173,29 +184,56 @@ public class Cenarios {
         gl.glDisable(GL2.GL_LIGHTING);
     }
 
-    // Método para desenhar o céu da segunda fase
     public void desenhaCeu2Fase(GL2 gl, GLUT glut) {
-        // Implementação específica do céu da segunda fase
+        // Limpa o buffer de cor e profundidade, configurando o fundo para preto
+        gl.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT);
+
+        // Desenha estrelas brancas no céu
+        gl.glColor3f(1.0f, 1.0f, 1.0f); // Cor branca para estrelas
+
+        for (int i = 0; i < 25; i++) {
+            float x = (float) (Math.random() * 400 * this.aspect) - 200 * this.aspect;
+            float y = (float) (Math.random() * 200 * this.aspect) - 100 * this.aspect;
+
+            gl.glPushMatrix();
+            gl.glTranslatef(x, y, 0);
+            glut.glutSolidSphere(0.1f * this.aspect, 5, 5); // Desenha uma pequena esfera como estrela
+            gl.glPopMatrix();
+        }
+
+        // Configuração da iluminação para os planetas
         configurarIluminacao(gl);
 
-        // Desenha planetas e anéis
-        drawPlanet(gl, glut, -150 * this.aspect, 20, 5 * this.aspect, 0.7f, 0.7f, 0.7f); // Mercúrio
-        drawPlanet(gl, glut, -100 * this.aspect, 40, 8 * this.aspect, 1.0f, 0.7f, 0.2f); // Vênus
-        drawPlanet(gl, glut, -50 * this.aspect, -70, 8 * this.aspect, 0.2f, 0.2f, 1.0f); // Terra
-        drawPlanet(gl, glut, 0, -10, 7 * this.aspect, 1.0f, 0.4f, 0.4f); // Marte
-        drawPlanet(gl, glut, 50 * this.aspect, 30, 20 * this.aspect, 0.8f, 0.5f, 0.2f); // Júpiter
+        // Fatores de escala para representar tamanhos reais dos planetas (em relação à Terra)
+        float escalaMercurio = 0.383f;
+        float escalaVenus = 0.949f;
+        float escalaTerra = 1.0f; // Tamanho da Terra mantido como referência
+        float escalaMarte = 0.532f;
+        float escalaJupiter = 5.0f;
+        float escalaSaturno = 4.0f;
+        float escalaUrano = 2.0f;
+        float escalaNetuno = 1.8f;
 
-        // Desenha anéis para a Terra (semelhantes aos de Saturno)
-        drawRings(gl, glut, -50 * this.aspect, -70, 8 * this.aspect);
+        // Desenha planetas estáticos do sistema solar (excluindo o Sol)
+        drawPlanet(gl, glut, -100 * this.aspect, 20, escalaMercurio * 5 * this.aspect, 0.7f, 0.7f, 0.7f); // Mercúrio
+        drawPlanet(gl, glut, -80 * this.aspect, 90, escalaVenus * 5 * this.aspect, 0.9f, 0.5f, 0.2f);    // Vênus
+        drawPlanet(gl, glut, -70 * this.aspect, -70, escalaTerra * 7 * this.aspect, 0.2f, 0.2f, 1.0f);   // Terra
+        drawPlanet(gl, glut, -50, 90, escalaMarte * 6 * this.aspect, 1.0f, 0.4f, 0.4f);                   // Marte
+        drawPlanet(gl, glut, 20 * this.aspect, 20, escalaSaturno * 5 * this.aspect, 0.8f, 0.8f, 0.7f); // Saturno
+        drawPlanet(gl, glut, 60 * this.aspect, -80, escalaUrano * 5 * this.aspect, 0.5f, 0.8f, 0.8f);     // Urano
+        drawPlanet(gl, glut, 100 * this.aspect, 50, escalaNetuno * 5 * this.aspect, 0.2f, 0.4f, 0.8f);   // Netuno
+
+        // Desenha anéis para Terra
+        drawRings(gl, glut, -70 * this.aspect, -70, escalaSaturno * 7 * this.aspect);
+
+        // Desenha a lua
+        drawLua(gl, glut);
 
         // Desativa a iluminação ao finalizar o desenho
         desativarIluminacao(gl);
-        gl.glFlush();
-    }
 
-    // Método para desenhar nuvens
-    public void desenhaNuvens(GL2 gl, GLUT glut) {
-        drawAlienShips(gl, glut);
+        gl.glFlush();
     }
 
     // Método para desenhar naves alienígenas
@@ -251,12 +289,12 @@ public class Cenarios {
         gl.glPopMatrix();
     }
 
-    // Desenha a lua como uma esfera
-    public void drawLua(GL2 gl, GLUT glut) {
+    // Método para desenhar a lua como uma esfera
+    void drawLua(GL2 gl, GLUT glut) {
         gl.glPushMatrix();
-        gl.glColor3f(1, 0.99f, 0.82f); // Cor da lua (tom amarelado)
-        gl.glTranslatef(65 * this.aspect, 65 * this.aspect, 15 * this.aspect); // Translação para a posição da lua
-        glut.glutSolidSphere(20 * this.aspect, 50, 50); // Desenha a esfera sólida representando a lua
+        gl.glTranslatef(65 * this.aspect, 65 * this.aspect, 15 * this.aspect); // Posição da lua
+        gl.glColor3f(1.0f, 1.0f, 0.0f); // Cor da lua (amarela)
+        glut.glutSolidSphere(25 * this.aspect, 50, 50); // Ajuste o raio para 30 (por exemplo)
         gl.glPopMatrix();
     }
 }
