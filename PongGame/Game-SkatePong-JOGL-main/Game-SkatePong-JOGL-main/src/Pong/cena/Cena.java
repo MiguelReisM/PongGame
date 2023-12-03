@@ -145,24 +145,24 @@ public class Cena implements GLEventListener {
         gl.glPopMatrix();
 
         //escrita do menu
-        desenhaTexto(gl, (int)(width/2.4), (int)(height/1.5), Color.PINK, "Protect The Earth"); // desenhaTexto(gl, 550*(int)(this.aspect), 550*(int)(this.aspect), Color.ORANGE, "Skate Pong");
-        desenhaTexto1(gl, (int)(width/3), (int)(height/1.55), Color.ORANGE, "Regras do jogo:\n\n\n\n ");
-        desenhaTexto2(gl, (int)(width/2.8), (int)(height/1.61), Color.ORANGE, "- Vocë deve evitar que o asteroide chegue a Terra.");
-        desenhaTexto2(gl, (int)(width/2.8), (int)(height/1.67), Color.ORANGE, "- Você possui 5 tentativas para impedir que o asteroide colida com os humanos.");
-        desenhaTexto2(gl, (int)(width/2.8), (int)(height/1.73), Color.ORANGE, "- Caso o asteroide consiga passar pela sua nave, uma vida se perde e a Terra perde população.");
-        desenhaTexto2(gl, (int)(width/2.8), (int)(height/1.80), Color.ORANGE, "- Você ganha 20 pontos a cada colisão de asteroide evitada.");
-        desenhaTexto2(gl, (int)(width/2.8), (int)(height/1.87), Color.ORANGE, "- Some 200 pontos e passe para a próxima fase onde agora o Sol tem influência no movimento do asteroide.");
-        desenhaTexto2(gl, (int)(width/2.8), (int)(height/1.94), Color.ORANGE, "- Na 2°, dificuldade maior e pontuação infinita.");
-        desenhaTexto1(gl, (int)(width/3),   (int)(height/2.05), Color.ORANGE, "Botões: ");
-        desenhaTexto2(gl, (int)(width/2.8), (int)(height/2.15), Color.ORANGE, "- \" <- \"/\" -> \"/\" A \"/\" D \": Movem a nave.");
-        desenhaTexto2(gl, (int)(width/2.8), (int)(height/2.25), Color.ORANGE, "- \" P \": Pausa o jogo.");
-        desenhaTexto2(gl, (int)(width/2.8), (int)(height/2.35), Color.ORANGE, "- \" S \": Volta para o menu.");
-        desenhaTexto2(gl, (int)(width/2.8), (int)(height/2.45), Color.ORANGE, "- \" J \": Start do jogo.");
-        desenhaTexto2(gl, (int)(width/2.8), (int)(height/2.58), Color.ORANGE, "- \" F \": Fecha o jogo.");
-        desenhaTexto1(gl, (int)(width/3),   (int)(height/2.95), Color.GREEN, "- Aperte \" J \" para começar.");
-        desenhaTexto1(gl, (int)(width/1.9), (int)(height/2.95 ), Color.RED, " | \" F \" para sair.");
+        desenhaTexto(gl, (int)(width/5.0), (int)(height/1.5), Color.MAGENTA, "Protect The Earth");
+        desenhaTexto1(gl, (int)(width/5.5), (int)(height/1.55), Color.WHITE, "Regras do jogo:\n\n\n\n ");
+        desenhaTexto2(gl, (int)(width/5.2), (int)(height/1.61), Color.WHITE, "- Você deve evitar que o asteroide chegue a Terra.");
+        desenhaTexto2(gl, (int)(width/5.2), (int)(height/1.67), Color.WHITE, "- Você possui 5 tentativas para impedir que o asteroide colida com os humanos.");
+        desenhaTexto2(gl, (int)(width/5.2), (int)(height/1.73), Color.WHITE, "- Caso o asteroide consiga passar pela sua nave, uma vida se perde e a Terra perde população.");
+        desenhaTexto2(gl, (int)(width/5.2), (int)(height/1.80), Color.WHITE, "- Você ganha 20 pontos a cada colisão de asteroide evitada.");
+        desenhaTexto2(gl, (int)(width/5.2), (int)(height/1.87), Color.WHITE, "- Some 200 pontos e passe de fase onde agora o Sol influência no movimento do asteroide.");
+        desenhaTexto2(gl, (int)(width/5.2), (int)(height/1.94), Color.WHITE, "- Na 2°, dificuldade maior e pontuação infinita.");
+        desenhaTexto1(gl, (int)(width/5.5), (int)(height/2.05), Color.WHITE, "Botões: ");
+        desenhaTexto2(gl, (int)(width/5.2), (int)(height/2.15), Color.WHITE, "- \" <- \"/\" -> \"/\" A \"/\" D \": Movem a nave.");
+        desenhaTexto2(gl, (int)(width/5.2), (int)(height/2.25), Color.WHITE, "- \" P \": Pausa o jogo.");
+        desenhaTexto2(gl, (int)(width/5.2), (int)(height/2.35), Color.WHITE, "- \" S \": Volta para o menu.");
+        desenhaTexto2(gl, (int)(width/5.2), (int)(height/2.45), Color.WHITE, "- \" J \": Start do jogo.");
+        desenhaTexto2(gl, (int)(width/5.2), (int)(height/2.58), Color.WHITE, "- \" F \": Fecha o jogo.");
+        desenhaTexto1(gl, (int)(width/5.5), (int)(height/2.95), Color.GREEN, "- Aperte \" J \" para começar.");
+        desenhaTexto1(gl, (int)(width/2.8), (int)(height/2.95), Color.RED, " | \" F \" para sair.");
 
-        //se o usuário esta no menu, ele tem 5 vidas e sua pontuação zerada
+        //se o usuário está no menu, ele tem 5 vidas e sua pontuação zerada
         vidas = 5;
         pontuacao = 0;
     }
@@ -197,8 +197,8 @@ public class Cena implements GLEventListener {
         miniMenu(gl, glut);
         
         //contagem da pontuacao na tela
-        desenhaTexto1(gl, (int)(width/2.0), (int)(height/1.07), Color.ORANGE, "Score = ");
-        desenhaTexto1(gl, (int)(width/1.82), (int)(height/1.07), Color.ORANGE, Integer.toString(pontuacao));
+        desenhaTexto1(gl, (int)(width/2.0), (int)(height/1.07), Color.YELLOW, "Score = ");
+        desenhaTexto1(gl, (int)(width/1.82), (int)(height/1.07), Color.YELLOW, Integer.toString(pontuacao));
         
         
         //desenho da vida (coração) + contagem
@@ -272,8 +272,8 @@ public class Cena implements GLEventListener {
         miniMenu(gl, glut);
         
         //contagem da pontuacao na tela
-        desenhaTexto1(gl, (int)(width/2.0), (int)(height/1.07), Color.ORANGE, "Score = ");
-        desenhaTexto1(gl, (int)(width/1.82), (int)(height/1.07), Color.ORANGE, Integer.toString(pontuacao));
+        desenhaTexto1(gl, (int)(width/2.0), (int)(height/1.07), Color.YELLOW, "Score = ");
+        desenhaTexto1(gl, (int)(width/1.82), (int)(height/1.07), Color.YELLOW, Integer.toString(pontuacao));
         
         //desenho da vida (coração) + contagem
         desenhaTexto1(gl, (int)(width/14.0), (int)(height/1.07), Color.RED, "  =  ");
@@ -322,11 +322,11 @@ public class Cena implements GLEventListener {
             glut.glutSolidCube(80*this.aspect);
         gl.glPopMatrix();
         //informações sobre o fim do jogo
-        desenhaTexto(gl, (int)(width/2.4), (int)(height/1.5), Color.ORANGE, "Fim de jogo!");
-        desenhaTexto1(gl, (int)(width/2.3), (int)(height/1.8), Color.ORANGE, "Sua pontuação: ");
-        desenhaTexto(gl, (int)(width/2.3), (int)(height/2.2), Color.ORANGE, Integer.toString(pontuacao));
+        desenhaTexto(gl, (int)(width/2.4), (int)(height/1.5), Color.RED, "Fim de jogo!");
+        desenhaTexto1(gl, (int)(width/2.3), (int)(height/1.8), Color.WHITE, "Sua pontuação: ");
+        desenhaTexto(gl, (int)(width/2.3), (int)(height/2.2), Color.WHITE, Integer.toString(pontuacao));
         desenhaTexto1(gl, (int)(width/2.3), (int)(height/2.6), Color.GREEN, "Aperte S para voltar ao menu.");
-        desenhaTexto1(gl, (int)(width/2.3), (int)(height/2.8), Color.GREEN, "Aperte F para fechar o jogo.");
+        desenhaTexto1(gl, (int)(width/2.3), (int)(height/2.8), Color.RED, "Aperte F para fechar o jogo.");
 
     }
     
