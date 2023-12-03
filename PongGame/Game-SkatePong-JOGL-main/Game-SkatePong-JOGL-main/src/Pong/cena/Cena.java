@@ -120,45 +120,49 @@ public class Cena implements GLEventListener {
     }
     
     //método para mostrar o menu inicial
+    //método para mostrar o menu inicial
     public void menu(GL2 gl, GLUT glut)
     {
         //desliga luz difusa
         desligaLuz1(gl);
         //liga luz ambiente
-        ligaLuz0(gl);
         iluminacaoAmbiente(gl);
-        
+
         //Desenho do cenário junto ao menu
         gl.glPushMatrix();
-            cenarios.drawCenario1(gl, glut);
+        cenarios.drawCenario1(gl, glut);
         gl.glPopMatrix();
-        
+
         //desenho da base atrás do menu
+
         gl.glPushMatrix();
-            gl.glColor3f(0, 0.5f, 1);
-            gl.glTranslatef(2*this.aspect, -5*this.aspect, 100*this.aspect);
-            glut.glutSolidCube(80*this.aspect);
+
+        // Esfera com cor de piscina
+        gl.glColor3f(0.5f, 0.7f, 1.0f); // Azul claro como cor de piscina
+        gl.glTranslatef(50 * this.aspect, 2 * this.aspect, 120 * this.aspect);
+        glut.glutSolidSphere(40 * this.aspect, 50, 50);
+
         gl.glPopMatrix();
-        
+
         //escrita do menu
-        desenhaTexto(gl, (int)(width/2.4), (int)(height/1.5), Color.PINK, "Skate Pong"); // desenhaTexto(gl, 550*(int)(this.aspect), 550*(int)(this.aspect), Color.ORANGE, "Skate Pong");
+        desenhaTexto(gl, (int)(width/2.4), (int)(height/1.5), Color.PINK, "Protect The Earth"); // desenhaTexto(gl, 550*(int)(this.aspect), 550*(int)(this.aspect), Color.ORANGE, "Skate Pong");
         desenhaTexto1(gl, (int)(width/3), (int)(height/1.55), Color.ORANGE, "Regras do jogo:\n\n\n\n ");
-        desenhaTexto2(gl, (int)(width/2.8), (int)(height/1.61), Color.ORANGE, "- A bola deve colidir com skate.");      
-        desenhaTexto2(gl, (int)(width/2.8), (int)(height/1.67), Color.ORANGE, "- Você começa com 5 vidas.");
-        desenhaTexto2(gl, (int)(width/2.8), (int)(height/1.73), Color.ORANGE, "- Se a bola não colidir, uma vida será perdida.");
-        desenhaTexto2(gl, (int)(width/2.8), (int)(height/1.80), Color.ORANGE, "- Ganhe 20 pontos a cada colisão.");
-        desenhaTexto2(gl, (int)(width/2.8), (int)(height/1.87), Color.ORANGE, "- Some 200 pontos e passe para a 2° fase.");
+        desenhaTexto2(gl, (int)(width/2.8), (int)(height/1.61), Color.ORANGE, "- Vocë deve evitar que o asteroide chegue a Terra.");
+        desenhaTexto2(gl, (int)(width/2.8), (int)(height/1.67), Color.ORANGE, "- Você possui 5 tentativas para impedir que o asteroide colida com os humanos.");
+        desenhaTexto2(gl, (int)(width/2.8), (int)(height/1.73), Color.ORANGE, "- Caso o asteroide consiga passar pela sua nave, uma vida se perde e a Terra perde população.");
+        desenhaTexto2(gl, (int)(width/2.8), (int)(height/1.80), Color.ORANGE, "- Você ganha 20 pontos a cada colisão de asteroide evitada.");
+        desenhaTexto2(gl, (int)(width/2.8), (int)(height/1.87), Color.ORANGE, "- Some 200 pontos e passe para a próxima fase onde agora o Sol tem influência no movimento do asteroide.");
         desenhaTexto2(gl, (int)(width/2.8), (int)(height/1.94), Color.ORANGE, "- Na 2°, dificuldade maior e pontuação infinita.");
         desenhaTexto1(gl, (int)(width/3),   (int)(height/2.05), Color.ORANGE, "Botões: ");
-        desenhaTexto2(gl, (int)(width/2.8), (int)(height/2.15), Color.ORANGE, "- \" <- \"/\" -> \"/\" A \"/\" D \": Movem o skate.");
+        desenhaTexto2(gl, (int)(width/2.8), (int)(height/2.15), Color.ORANGE, "- \" <- \"/\" -> \"/\" A \"/\" D \": Movem a nave.");
         desenhaTexto2(gl, (int)(width/2.8), (int)(height/2.25), Color.ORANGE, "- \" P \": Pausa o jogo.");
         desenhaTexto2(gl, (int)(width/2.8), (int)(height/2.35), Color.ORANGE, "- \" S \": Volta para o menu.");
         desenhaTexto2(gl, (int)(width/2.8), (int)(height/2.45), Color.ORANGE, "- \" J \": Start do jogo.");
         desenhaTexto2(gl, (int)(width/2.8), (int)(height/2.58), Color.ORANGE, "- \" F \": Fecha o jogo.");
         desenhaTexto1(gl, (int)(width/3),   (int)(height/2.95), Color.GREEN, "- Aperte \" J \" para começar.");
         desenhaTexto1(gl, (int)(width/1.9), (int)(height/2.95 ), Color.RED, " | \" F \" para sair.");
-        
-        //se o usuário esta no menu, ele tem 5 vidas e sua pontuação zerada        
+
+        //se o usuário esta no menu, ele tem 5 vidas e sua pontuação zerada
         vidas = 5;
         pontuacao = 0;
     }

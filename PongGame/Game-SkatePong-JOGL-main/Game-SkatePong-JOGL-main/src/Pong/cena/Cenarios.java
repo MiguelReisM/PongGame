@@ -21,6 +21,7 @@ public class Cenarios {
     // Método para desenhar cenário do menu
     public void drawCenario1(GL2 gl, GLUT glut) {
         // Implementação específica do cenário do menu
+        desenhaCeuMenu(gl, glut);
     }
 
     // Método para desenhar cenário da primeira fase
@@ -39,12 +40,6 @@ public class Cenarios {
     // Método para desenhar cenário do fim do jogo
     public void drawCenario4(GL2 gl, GLUT glut) {
         desenhaCampoFim(gl);
-        desenhaCeuFim(gl, glut);
-    }
-
-    // Método privado para desenhar o céu do fim do jogo
-    private void desenhaCeuFim(GL2 gl, GLUT glut) {
-        // Implementação específica do céu do fim do jogo
     }
 
     // Desenha o campo da primeira fase
@@ -88,6 +83,31 @@ public class Cenarios {
         gl.glVertex2f(200 * this.aspect, -81.6f * this.aspect);
         gl.glEnd();
         gl.glFlush();
+    }
+
+    //desenha o ceu com as nuvens do menu
+
+    public void desenhaCeuMenu(GL2 gl, GLUT glut) {
+        // Define a cor de fundo para preto
+        gl.glClearColor(0, 0, 0, 1);
+        gl.glClear(GL2.GL_COLOR_BUFFER_BIT);
+
+        gl.glPushMatrix();
+        gl.glTranslatef((movNuvens += 0.04f) * this.aspect, 0, 0);
+        desenhaNuvens(gl, glut);
+        gl.glPopMatrix();
+
+        // Desenha o céu preto
+        gl.glPushMatrix();
+        gl.glColor3f(0, 0, 0); // Cor preta
+        gl.glBegin(GL2.GL_QUADS);
+        gl.glVertex2f(-200 * this.aspect, -20 * this.aspect);
+        gl.glVertex2f(-200 * this.aspect, 100 * this.aspect);
+        gl.glVertex2f(200 * this.aspect, 100 * this.aspect);
+        gl.glVertex2f(200 * this.aspect, -20 * this.aspect);
+        gl.glEnd();
+        gl.glFlush();
+        gl.glPopMatrix();
     }
 
     // Desenha o céu da primeira fase
@@ -236,56 +256,49 @@ public class Cenarios {
         gl.glFlush();
     }
 
-    // Método para desenhar naves alienígenas
-    public void drawAlienShips(GL2 gl, GLUT glut) {
-        // Desenha a nave alienígena 1
-        drawAlienShip(gl, glut, -50 * this.aspect, 30 * this.aspect, 10 * this.aspect, 1.0f, 0.0f, 0.0f);
+    public void desenhaNuvens(GL2 gl, GLUT glut)
+    {
+        // Draw clouds
+        // ...
 
-        // Desenha a nave alienígena 2
-        drawAlienShip(gl, glut, 100 * this.aspect, -40 * this.aspect, 12 * this.aspect, 0.0f, 1.0f, 0.0f);
+        // Draw alien ships
+        drawAlienShips(gl, glut);
     }
 
-    // Método para desenhar uma nave alienígena
-    public void drawAlienShip(GL2 gl, GLUT glut, float x, float y, float size, float r, float g, float b) {
+    public void drawAlienShips(GL2 gl, GLUT glut)
+    {
+        // Draw alien ship 1
+        drawAlienShip(gl, glut, -50 * this.aspect, 30 * this.aspect, 10 * this.aspect, 1.0f, 0.0f, 0.0f);
+
+        // Draw alien ship 2
+        drawAlienShip(gl, glut, 100 * this.aspect, -40 * this.aspect, 12 * this.aspect, 0.0f, 1.0f, 0.0f);
+
+        // Draw more alien ships as needed
+    }
+
+    public void drawAlienShip(GL2 gl, GLUT glut, float x, float y, float size, float r, float g, float b)
+    {
         gl.glPushMatrix();
         gl.glTranslatef(x, y, 0);
         gl.glColor3f(r, g, b);
 
-        // Desenha o corpo da nave alienígena (pode ser personalizado)
-        gl.glBegin(GL2.GL_QUADS);
-        gl.glVertex2f(-size, -size / 2);
-        gl.glVertex2f(-size, size / 2);
-        gl.glVertex2f(size, size / 2);
-        gl.glVertex2f(size, -size / 2);
-        gl.glEnd();
-
-        // Desenha outras partes da nave alienígena conforme necessário
-
-        gl.glPopMatrix();
-    }
-
-    // Método para desenhar nuvem pequena
-    // Desenha uma nuvem pequena composta por três esferas
-    public void desenhaNuvemP(GL2 gl, GLUT glut) {
-        // Primeira esfera da nuvem
+        // Corpo principal da nave
+        gl.glColor3f(0.8f, 0.2f, 0.8f); // Cor roxa
         gl.glPushMatrix();
-        gl.glTranslatef(0, 0, 0); // Translação para a posição da primeira esfera
-        gl.glColor3f(1, 1, 1);    // Cor da esfera (branco)
-        glut.glutSolidSphere(8 * this.aspect, 50, 50); // Desenha a esfera sólida
+        gl.glTranslatef(0, -90 * this.aspect, 60 * this.aspect);
+        gl.glScalef(1, 0.5f, 0.5f); // Achatamento para uma forma mais interessante
+        glut.glutSolidSphere(15 * this.aspect, 16, 8);
         gl.glPopMatrix();
 
-        // Segunda esfera da nuvem
+        // Parte frontal da nave
+        gl.glColor3f(0.2f, 0.8f, 0.2f); // Cor verde
         gl.glPushMatrix();
-        gl.glTranslatef(8 * this.aspect, 2 * this.aspect, 0); // Translação para a posição da segunda esfera
-        gl.glColor3f(1, 1, 1);    // Cor da esfera (branco)
-        glut.glutSolidSphere(8 * this.aspect, 50, 50); // Desenha a esfera sólida
+        gl.glTranslatef(0, -90 * this.aspect, 40 * this.aspect);
+        glut.glutSolidCone(10 * this.aspect, 40 * this.aspect, 16, 8);
         gl.glPopMatrix();
 
-        // Terceira esfera da nuvem
-        gl.glPushMatrix();
-        gl.glTranslatef(16 * this.aspect, 0, 0); // Translação para a posição da terceira esfera
-        gl.glColor3f(1, 1, 1);    // Cor da esfera (branco)
-        glut.glutSolidSphere(8 * this.aspect, 50, 50); // Desenha a esfera sólida
+        // Draw other parts of the alien ship as needed
+
         gl.glPopMatrix();
     }
 
