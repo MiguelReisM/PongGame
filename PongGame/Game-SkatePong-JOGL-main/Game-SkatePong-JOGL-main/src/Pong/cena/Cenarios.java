@@ -74,15 +74,16 @@ public class Cenarios {
 
     // Desenha o campo do fim de jogo
     public void desenhaCampoFim(GL2 gl) {
-        // Desenha um campo mais escuro para o fim do jogo
-        gl.glColor3f(0, 0.39f, 0);
+        gl.glPushMatrix();
+        gl.glColor3f(0, 0, 0); // Cor preta
         gl.glBegin(GL2.GL_QUADS);
-        gl.glVertex2f(-200 * this.aspect, -81.6f * this.aspect);
         gl.glVertex2f(-200 * this.aspect, -20 * this.aspect);
+        gl.glVertex2f(-200 * this.aspect, 100 * this.aspect);
+        gl.glVertex2f(200 * this.aspect, 100 * this.aspect);
         gl.glVertex2f(200 * this.aspect, -20 * this.aspect);
-        gl.glVertex2f(200 * this.aspect, -81.6f * this.aspect);
         gl.glEnd();
         gl.glFlush();
+        gl.glPopMatrix();
     }
 
     //desenha o ceu com as nuvens do menu
