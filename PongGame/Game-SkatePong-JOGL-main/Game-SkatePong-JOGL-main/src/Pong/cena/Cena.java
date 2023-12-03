@@ -329,19 +329,32 @@ public class Cena implements GLEventListener {
     //desenho da vida (coração)
     public void desenhaCoracao(GL2 gl, GLUT glut)
     {
+        // Desenha a cabeça
         gl.glPushMatrix();
-            gl.glColor3f(0.50f, 0.10f, 0.10f);
-            glut.glutSolidSphere(1.5f*this.aspect, 50, 50);
+        gl.glColor3f(1.0f, 0.84f, 0.66f); // Cor amarela para a cabeça
+        glut.glutSolidSphere(4.0f * this.aspect, 50, 50); // Aumentei o raio para 4.0f
         gl.glPopMatrix();
+
+        // Desenha os olhos (dois círculos pequenos)
         gl.glPushMatrix();
-            gl.glTranslatef(2.5f*this.aspect, 0, 0);
-            glut.glutSolidSphere(1.5f*this.aspect, 50, 50);
+        gl.glColor3f(0.0f, 0.0f, 0.0f); // Cor preta para os olhos
+        gl.glTranslatef(-1.5f * this.aspect, 1.0f * this.aspect, 3.2f * this.aspect); // Ajustei as coordenadas
+        glut.glutSolidSphere(0.8f * this.aspect, 50, 50); // Aumentei o raio para 0.8f
         gl.glPopMatrix();
+
         gl.glPushMatrix();
-            gl.glTranslatef(1.25f*this.aspect, -0.97f*this.aspect, 0);
-            gl.glRotatef(90, 1, 0, 0);
-            glut.glutSolidCone(2.5f*this.aspect, 4.6f*this.aspect, 50, 50);
-        gl.glPopMatrix();  
+        gl.glColor3f(0.0f, 0.0f, 0.0f); // Cor preta para os olhos
+        gl.glTranslatef(1.5f * this.aspect, 1.0f * this.aspect, 3.2f * this.aspect); // Ajustei as coordenadas
+        glut.glutSolidSphere(0.8f * this.aspect, 50, 50); // Aumentei o raio para 0.8f
+        gl.glPopMatrix();
+
+        // Desenha a boca (um arco)
+        gl.glPushMatrix();
+        gl.glColor3f(0.0f, 0.0f, 0.0f); // Cor preta para a boca
+        gl.glTranslatef(0.0f, -1.4f * this.aspect, 3.0f * this.aspect); // Ajustei as coordenadas
+        gl.glRotatef(180, 1, 0, 0); // Gira a boca para baixo
+        glut.glutSolidCone(2.0f * this.aspect, 2.5f * this.aspect, 50, 50); // Reduzi o tamanho da boca
+        gl.glPopMatrix();
     }
     
     //mostra o mini menu durante o jogo
