@@ -292,7 +292,7 @@ public class Cena implements GLEventListener {
         }
         else 
         {
-            desenhaTexto(gl, (int)(width/2.30), (int)(height/1.67), Color.MAGENTA, "PAUSADO　");
+            desenhaTexto(gl, (int)(width/2.30), (int)(height/1.67), Color.MAGENTA, "PAUSADO　こに");
             desenhaTexto1(gl, (int)(width/2.2), (int)(height/1.74), Color.GREEN, "Aperte P para voltar.");
         }
         
