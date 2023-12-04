@@ -292,7 +292,7 @@ public class Cena implements GLEventListener {
         }
         else 
         {
-            desenhaTexto(gl, (int)(width/2.30), (int)(height/1.67), Color.MAGENTA, "PAUSADO");
+            desenhaTexto(gl, (int)(width/2.30), (int)(height/1.67), Color.MAGENTA, "PAUSADO　");
             desenhaTexto1(gl, (int)(width/2.2), (int)(height/1.74), Color.GREEN, "Aperte P para voltar.");
         }
         
@@ -313,7 +313,7 @@ public class Cena implements GLEventListener {
         gl.glPopMatrix();
 
         //informações sobre o fim do jogo
-        desenhaTexto(gl, (int)(width/2.4), (int)(height/1.5), Color.MAGENTA, "Fim de jogo!");
+        desenhaTexto(gl, (int)(width/2.4), (int)(height/1.5), Color.MAGENTA, "A Terra foi destruída!");
         desenhaTexto1(gl, (int)(width/2.3), (int)(height/1.8), Color.WHITE, "Sua pontuação: ");
         desenhaTexto(gl, (int)(width/2.3), (int)(height/2.2), Color.WHITE, Integer.toString(pontuacao));
         desenhaTexto1(gl, (int)(width/2.3), (int)(height/2.6), Color.GREEN, "Aperte S para voltar ao menu.");
