@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
+import textura.Textura;
 
 public class Jogo implements GLEventListener {
 
@@ -43,6 +44,21 @@ public class Jogo implements GLEventListener {
     //variavel para pausar o jogo
     public boolean pausar = true;
 
+    public float limite;
+    private Textura textura;
+    private int totalTextura = 6;
+
+    private float angulo = 0;
+
+    public float incAngulo = 0;
+
+
+    //Constantes para identificar as imagens
+    public static final String FACE1 = "C:\\Users\\Nicolas Ferreira\\Documents\\antlr\\PongGame\\PongGame\\Game-SkatePong-JOGL-main\\Game-SkatePong-JOGL-main\\src\\imagens\\terra.png";
+    public int filtro = GL2.GL_LINEAR; ////GL_NEAREST ou GL_LINEAR
+    public int wrap = GL2.GL_REPEAT;  //GL.GL_REPEAT ou GL.GL_CLAMP
+    public int modo = GL2.GL_DECAL; ////GL.GL_MODULATE ou GL.GL_DECAL ou GL.GL_BLEND
+
     //iniciar textos
     private TextRenderer textRenderer;
     private TextRenderer textRenderer1;
@@ -61,6 +77,12 @@ public class Jogo implements GLEventListener {
         //dados iniciais da cena
         glu = new GLU();
         GL2 gl = drawable.getGL().getGL2();
+
+        angulo = 0;
+        incAngulo = 0;
+        limite = 1;
+
+        textura = new Textura(totalTextura);
 
         //Estabelece as coordenadas do SRU (Sistema de Referencia do Universo)
         xMin = yMin = zMin = -100*this.aspect;
@@ -127,6 +149,16 @@ public class Jogo implements GLEventListener {
         //liga luz ambiente
         iluminacaoAmbiente(gl);
 
+        //não é geração de textura automática
+        textura.setAutomatica(false);
+        
+        //configura os filtros
+        textura.setFiltro(filtro);
+        textura.setModo(modo);
+        textura.setWrap(wrap);  
+
+        textura.gerarTextura(gl, FACE1, 0);
+
         //Desenho do cenário junto ao menu
         gl.glPushMatrix();
         cenarios.drawCenario1(gl, glut);
@@ -134,13 +166,27 @@ public class Jogo implements GLEventListener {
 
         //desenho da base atrás do menu
 
-        gl.glPushMatrix();
+        // gl.glPushMatrix();
 
         // Asteroide com cor de piscina
-        gl.glColor3f(0.5f, 0.7f, 1.0f); // Azul claro como cor de piscina
-        gl.glTranslatef(50 * this.aspect, 2 * this.aspect, 120 * this.aspect);
-        glut.glutSolidSphere(40 * this.aspect, 50, 50);
+        // gl.glColor3f(0.5f, 0.7f, 1.0f); // Azul claro como cor de piscina
+        // gl.glTranslatef(50 * this.aspect, 2 * this.aspect, 120 * this.aspect);
+        // glut.glutSolidSphere(40 * this.aspect, 50, 50);
+        // gl.glPopMatrix();
+        gl.glPushMatrix();
+        //quadrado com textura
+            gl.glBegin (GL2.GL_QUADS );
+            //coordenadas da Textura            //coordenadas do quads
+                gl.glTexCoord2f(0.0f, limite);     gl.glVertex3f(-30.0f, -30.0f,  30.0f);
+                gl.glTexCoord2f(limite, limite);     gl.glVertex3f( 30.0f, -30.0f,  30.0f);
+                gl.glTexCoord2f(limite, 0.0f);     gl.glVertex3f( 30.0f,  30.0f,  30.0f);
+                gl.glTexCoord2f(0.0f, 0.0f);     gl.glVertex3f(-30.0f,  30.0f,  30.0f);
+            gl.glEnd();
         gl.glPopMatrix();
+        //desabilita a textura indicando o índice
+        textura.desabilitarTextura(gl, 0);
+
+
 
         //escrita do menu
         desenhaTexto(gl, (int)(width/5.0), (int)(height/1.5), Color.MAGENTA, "Protect The Earth");
