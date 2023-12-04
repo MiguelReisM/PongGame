@@ -319,6 +319,8 @@ public class Cena implements GLEventListener {
         desenhaTexto1(gl, (int)(width/2.3), (int)(height/2.6), Color.GREEN, "Aperte S para voltar ao menu.");
         desenhaTexto1(gl, (int)(width/2.3), (int)(height/2.8), Color.RED, "Aperte F para fechar o jogo.");
 
+        pausar = true;
+
     }
     
     //desenho da vida (coração)
