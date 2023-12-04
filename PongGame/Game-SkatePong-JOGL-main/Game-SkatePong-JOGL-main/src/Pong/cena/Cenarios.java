@@ -7,7 +7,7 @@ import com.jogamp.opengl.util.gl2.GLUT;
 // Classe para produção dos cenários
 public class Cenarios {
     // Dados para animação do cenário no menu
-    public float movNuvens = 0;
+    public float movNave = 0;
 
     // Dados para renderização dos objetos
     public double width = screenSize.getWidth();
@@ -34,7 +34,7 @@ public class Cenarios {
     public void drawCenario3(GL2 gl, GLUT glut) {
         desenhaCampo2Fase(gl);
         desenhaCeu2Fase(gl, glut);
-        drawLua(gl, glut);
+        drawSol(gl, glut);
     }
 
     // Método para desenhar cenário do fim do jogo
@@ -94,7 +94,7 @@ public class Cenarios {
         gl.glClear(GL2.GL_COLOR_BUFFER_BIT);
 
         gl.glPushMatrix();
-        gl.glTranslatef((movNuvens += 0.04f) * this.aspect, 0, 0);
+        gl.glTranslatef((movNave += 0.04f) * this.aspect, 0, 0);
         desenhaNuvens(gl, glut);
         gl.glPopMatrix();
 
@@ -134,26 +134,26 @@ public class Cenarios {
         configurarIluminacao(gl);
 
         // Fatores de escala para representar tamanhos reais dos planetas (em relação à Terra)
-        float escalaMercurio = 0.383f;
-        float escalaVenus = 0.949f;
-        float escalaTerra = 1.0f; // Tamanho da Terra mantido como referência
-        float escalaMarte = 0.532f;
-        float escalaJupiter = 5.0f;
-        float escalaSaturno = 4.0f;
-        float escalaUrano = 2.0f;
-        float escalaNetuno = 1.8f;
+        float escalaPlaneta1 = 0.383f;
+        float escalaPlaneta2 = 0.949f;
+        float escalaPlaneta3 = 1.0f; // Tamanho da Terra mantido como referência
+        float escalaPlaneta4 = 0.532f;
+        float escalaPlaneta5 = 5.0f;
+        float escalaPlaneta6 = 4.0f;
+        float escalaPlaneta7 = 2.0f;
+        float escalaPlaneta8 = 1.8f;
 
         // Desenha planetas estáticos do sistema solar (excluindo o Sol)
-        drawPlanet(gl, glut, -100 * this.aspect, 20, escalaMercurio * 5 * this.aspect, 0.7f, 0.7f, 0.7f); // Mercúrio
-        drawPlanet(gl, glut, -80 * this.aspect, 90, escalaVenus * 5 * this.aspect, 0.9f, 0.5f, 0.2f);    // Vênus
-        drawPlanet(gl, glut, -70 * this.aspect, -70, escalaTerra * 7 * this.aspect, 0.2f, 0.2f, 1.0f);   // Terra
-        drawPlanet(gl, glut, -50, 90, escalaMarte * 6 * this.aspect, 1.0f, 0.4f, 0.4f);                   // Marte
-        drawPlanet(gl, glut, 20 * this.aspect, 20, escalaSaturno * 5 * this.aspect, 0.8f, 0.8f, 0.7f); // Saturno
-        drawPlanet(gl, glut, 60 * this.aspect, -80, escalaUrano * 5 * this.aspect, 0.5f, 0.8f, 0.8f);     // Urano
-        drawPlanet(gl, glut, 100 * this.aspect, 50, escalaNetuno * 5 * this.aspect, 0.2f, 0.4f, 0.8f);   // Netuno
+        desenharPlaneta(gl, glut, -100 * this.aspect, 20, escalaPlaneta1 * 5 * this.aspect, 0.7f, 0.7f, 0.7f); // Mercúrio
+        desenharPlaneta(gl, glut, -80 * this.aspect, 90, escalaPlaneta2 * 5 * this.aspect, 0.9f, 0.5f, 0.2f);    // Vênus
+        desenharPlaneta(gl, glut, -70 * this.aspect, -70, escalaPlaneta3 * 7 * this.aspect, 0.2f, 0.2f, 1.0f);   // Terra
+        desenharPlaneta(gl, glut, -50, 90, escalaPlaneta4 * 6 * this.aspect, 1.0f, 0.4f, 0.4f);                   // Marte
+        desenharPlaneta(gl, glut, 20 * this.aspect, 20, escalaPlaneta6 * 5 * this.aspect, 0.8f, 0.8f, 0.7f); // Saturno
+        desenharPlaneta(gl, glut, 60 * this.aspect, -80, escalaPlaneta7 * 5 * this.aspect, 0.5f, 0.8f, 0.8f);     // Urano
+        desenharPlaneta(gl, glut, 100 * this.aspect, 50, escalaPlaneta8 * 5 * this.aspect, 0.2f, 0.4f, 0.8f);   // Netuno
 
         // Desenha anéis para Terra
-        drawRings(gl, glut, -70 * this.aspect, -70, escalaSaturno * 7 * this.aspect);
+        DesenheAneis(gl, glut, -70 * this.aspect, -70, escalaPlaneta6 * 7 * this.aspect);
 
 
         // Desativa a iluminação ao finalizar o desenho
@@ -163,7 +163,7 @@ public class Cenarios {
     }
 
     // Método auxiliar para desenhar um planeta estático
-    private void drawPlanet(GL2 gl, GLUT glut, float x, float y, float radius, float r, float g, float b) {
+    private void desenharPlaneta(GL2 gl, GLUT glut, float x, float y, float radius, float r, float g, float b) {
         gl.glPushMatrix();
         gl.glTranslatef(x, y, 0);
         gl.glColor3f(r, g, b);
@@ -188,7 +188,7 @@ public class Cenarios {
     }
 
     // Método auxiliar para desenhar anéis (rings)
-    private void drawRings(GL2 gl, GLUT glut, float x, float y, float radius) {
+    private void DesenheAneis(GL2 gl, GLUT glut, float x, float y, float radius) {
         gl.glEnable(GL2.GL_BLEND);
         gl.glBlendFunc(GL2.GL_SRC_ALPHA, GL2.GL_ONE_MINUS_SRC_ALPHA);
         gl.glColor4f(0.6f, 0.6f, 0.6f, 0.5f); // Cor cinza semi-transparente para os anéis
@@ -227,29 +227,29 @@ public class Cenarios {
         configurarIluminacao(gl);
 
         // Fatores de escala para representar tamanhos reais dos planetas (em relação à Terra)
-        float escalaMercurio = 0.383f;
-        float escalaVenus = 0.949f;
-        float escalaTerra = 1.0f; // Tamanho da Terra mantido como referência
-        float escalaMarte = 0.532f;
-        float escalaJupiter = 5.0f;
-        float escalaSaturno = 4.0f;
-        float escalaUrano = 2.0f;
-        float escalaNetuno = 1.8f;
+        float escalaPlaneta1 = 0.383f;
+        float escalaPlaneta2 = 0.949f;
+        float escalaPlaneta3 = 1.0f; // Tamanho da Terra mantido como referência
+        float escalaPlaneta4 = 0.532f;
+        float escalaPlaneta5 = 5.0f;
+        float escalaPlaneta6 = 4.0f;
+        float escalaPlaneta7 = 2.0f;
+        float escalaPlaneta8 = 1.8f;
 
         // Desenha planetas estáticos do sistema solar (excluindo o Sol)
-        drawPlanet(gl, glut, -100 * this.aspect, 20, escalaMercurio * 5 * this.aspect, 0.7f, 0.7f, 0.7f); // Mercúrio
-        drawPlanet(gl, glut, -80 * this.aspect, 90, escalaVenus * 5 * this.aspect, 0.9f, 0.5f, 0.2f);    // Vênus
-        drawPlanet(gl, glut, -70 * this.aspect, -70, escalaTerra * 7 * this.aspect, 0.2f, 0.2f, 1.0f);   // Terra
-        drawPlanet(gl, glut, -50, 90, escalaMarte * 6 * this.aspect, 1.0f, 0.4f, 0.4f);                   // Marte
-        drawPlanet(gl, glut, 20 * this.aspect, 20, escalaSaturno * 5 * this.aspect, 0.8f, 0.8f, 0.7f); // Saturno
-        drawPlanet(gl, glut, 60 * this.aspect, -80, escalaUrano * 5 * this.aspect, 0.5f, 0.8f, 0.8f);     // Urano
-        drawPlanet(gl, glut, 100 * this.aspect, 50, escalaNetuno * 5 * this.aspect, 0.2f, 0.4f, 0.8f);   // Netuno
+        desenharPlaneta(gl, glut, -100 * this.aspect, 20, escalaPlaneta1 * 5 * this.aspect, 0.7f, 0.7f, 0.7f); // Mercúrio
+        desenharPlaneta(gl, glut, -80 * this.aspect, 90, escalaPlaneta2 * 5 * this.aspect, 0.9f, 0.5f, 0.2f);    // Vênus
+        desenharPlaneta(gl, glut, -70 * this.aspect, -70, escalaPlaneta3 * 7 * this.aspect, 0.2f, 0.2f, 1.0f);   // Terra
+        desenharPlaneta(gl, glut, -50, 90, escalaPlaneta4 * 6 * this.aspect, 1.0f, 0.4f, 0.4f);                   // Marte
+        desenharPlaneta(gl, glut, 20 * this.aspect, 20, escalaPlaneta6 * 5 * this.aspect, 0.8f, 0.8f, 0.7f); // Saturno
+        desenharPlaneta(gl, glut, 60 * this.aspect, -80, escalaPlaneta7 * 5 * this.aspect, 0.5f, 0.8f, 0.8f);     // Urano
+        desenharPlaneta(gl, glut, 100 * this.aspect, 50, escalaPlaneta8 * 5 * this.aspect, 0.2f, 0.4f, 0.8f);   // Netuno
 
         // Desenha anéis para Terra
-        drawRings(gl, glut, -70 * this.aspect, -70, escalaSaturno * 7 * this.aspect);
+        DesenheAneis(gl, glut, -70 * this.aspect, -70, escalaPlaneta6 * 7 * this.aspect);
 
         // Desenha a lua
-        drawLua(gl, glut);
+        drawSol(gl, glut);
 
         // Desativa a iluminação ao finalizar o desenho
         desativarIluminacao(gl);
@@ -259,25 +259,22 @@ public class Cenarios {
 
     public void desenhaNuvens(GL2 gl, GLUT glut)
     {
-        // Draw clouds
-        // ...
-
         // Draw alien ships
-        drawAlienShips(gl, glut);
+        desenheNaveAlien(gl, glut);
     }
 
-    public void drawAlienShips(GL2 gl, GLUT glut)
+    public void desenheNaveAlien(GL2 gl, GLUT glut)
     {
         // Draw alien ship 1
-        drawAlienShip(gl, glut, -50 * this.aspect, 30 * this.aspect, 10 * this.aspect, 1.0f, 0.0f, 0.0f);
+        desenheNaveAlien(gl, glut, -50 * this.aspect, 30 * this.aspect, 10 * this.aspect, 1.0f, 0.0f, 0.0f);
 
         // Draw alien ship 2
-        drawAlienShip(gl, glut, 100 * this.aspect, -40 * this.aspect, 12 * this.aspect, 0.0f, 1.0f, 0.0f);
+        desenheNaveAlien(gl, glut, 100 * this.aspect, -40 * this.aspect, 12 * this.aspect, 0.0f, 1.0f, 0.0f);
 
         // Draw more alien ships as needed
     }
 
-    public void drawAlienShip(GL2 gl, GLUT glut, float x, float y, float size, float r, float g, float b)
+    public void desenheNaveAlien(GL2 gl, GLUT glut, float x, float y, float size, float r, float g, float b)
     {
         gl.glPushMatrix();
         gl.glTranslatef(x, y, 0);
@@ -304,7 +301,7 @@ public class Cenarios {
     }
 
     // Método para desenhar a lua como uma asteroide
-    void drawLua(GL2 gl, GLUT glut) {
+    void drawSol(GL2 gl, GLUT glut) {
         gl.glPushMatrix();
         gl.glTranslatef(65 * this.aspect, 65 * this.aspect, 15 * this.aspect); // Posição da lua
         gl.glColor3f(1.0f, 1.0f, 0.0f); // Cor da lua (amarela)

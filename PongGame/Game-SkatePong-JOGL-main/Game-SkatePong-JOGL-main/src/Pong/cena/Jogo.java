@@ -120,7 +120,6 @@ public class Jogo implements GLEventListener {
     }
     
     //método para mostrar o menu inicial
-    //método para mostrar o menu inicial
     public void menu(GL2 gl, GLUT glut)
     {
         //desliga luz difusa
@@ -141,7 +140,6 @@ public class Jogo implements GLEventListener {
         gl.glColor3f(0.5f, 0.7f, 1.0f); // Azul claro como cor de piscina
         gl.glTranslatef(50 * this.aspect, 2 * this.aspect, 120 * this.aspect);
         glut.glutSolidSphere(40 * this.aspect, 50, 50);
-
         gl.glPopMatrix();
 
         //escrita do menu
@@ -183,8 +181,8 @@ public class Jogo implements GLEventListener {
         
         //desenha barra com a movimentação adaptada
         gl.glPushMatrix();
-            gl.glTranslatef(movSkateX, 0, 0);
-            nave.desenhaSkate(gl, glut);
+            gl.glTranslatef(movNaveX, 0, 0);
+            nave.desenhaNave(gl, glut);
         gl.glPopMatrix();
         
         //desenha a asteroide com a translação adaptada
@@ -208,7 +206,7 @@ public class Jogo implements GLEventListener {
         desenhaTexto1(gl, (int)(width/11.3), (int)(height/1.07), Color.MAGENTA, Integer.toString(vidas));
         gl.glPushMatrix();
             gl.glTranslatef(-90*this.aspect, 90*this.aspect, 30*this.aspect);
-            desenhaCoracao(gl, glut);
+            desenhaVidas(gl, glut);
         gl.glPopMatrix();
         
         //acionamento do botão pausar
@@ -246,7 +244,7 @@ public class Jogo implements GLEventListener {
         
         //desenha a lua
         gl.glPushMatrix();
-            cenarios.drawLua(gl, glut);
+            cenarios.drawSol(gl, glut);
         gl.glPopMatrix();
                
         //desenha cenário com movimentação adaptada
@@ -257,8 +255,8 @@ public class Jogo implements GLEventListener {
         
         //desenha barra com a movimentação adaptada
         gl.glPushMatrix();
-            gl.glTranslatef(movSkateX, 0, 0);
-            nave.desenhaSkate(gl, glut);
+            gl.glTranslatef(movNaveX, 0, 0);
+            nave.desenhaNave(gl, glut);
         gl.glPopMatrix();
         
         //desenha a asteroide com a translação adaptada
@@ -282,7 +280,7 @@ public class Jogo implements GLEventListener {
         desenhaTexto1(gl, (int)(width/11.3), (int)(height/1.07), Color.MAGENTA, Integer.toString(vidas));
         gl.glPushMatrix();
             gl.glTranslatef(-90*this.aspect, 90*this.aspect, 30*this.aspect);
-            desenhaCoracao(gl, glut);
+            desenhaVidas(gl, glut);
         gl.glPopMatrix();
         
         //acionamento do botão pausar
@@ -324,7 +322,7 @@ public class Jogo implements GLEventListener {
     }
     
     //desenho da vida (coração)
-    public void desenhaCoracao(GL2 gl, GLUT glut)
+    public void desenhaVidas(GL2 gl, GLUT glut)
     {
         // Desenha a cabeça
         gl.glPushMatrix();
@@ -521,7 +519,7 @@ public class Jogo implements GLEventListener {
     //o nave foi "dividido" em três para alterar a direção da asteroide caso colidir em diferentes extremidades
    
     //método para colisão da asteroide com o nave na extremidade da esquerda
-    public boolean colisaoEsquerdaSkate() 
+    public boolean colisaoEsquerdaNave()
     {
         float limiteEsqSkate = movSkateX - 19.0f;//limite do tamanho do nave na esquerda
         float esquerdaSkate = movSkateX - 17.0f;//um pouco abaixo do limite
@@ -536,7 +534,7 @@ public class Jogo implements GLEventListener {
     }
     
     //método para colisão da asteroide com o meio do nave
-    public boolean colisaoMeioSkate() 
+    public boolean colisaoMeioNave()
     {
         float limiteEsqSkate = movSkateX - 17.0f;//limite do tamanho do nave na esquerda
         float limiteDirSkate = movSkateX + 17.0f;//limite do tamanho do nave na direita
@@ -551,7 +549,7 @@ public class Jogo implements GLEventListener {
     }
  
     //método para colisão da asteroide com o nave na extremidade da direita
-    public boolean colisaoDireitaSkate() 
+    public boolean colisaoDireitaNave()
     {
         float limiteDirSkate = movSkateX + 19; //limite do tamanho do nave na direita
         float direitaSkate = movSkateX + 17; //um pouco abaixo do limite
@@ -566,7 +564,7 @@ public class Jogo implements GLEventListener {
     }
     
     //método para colisão da asteroide com a parte inferior da lua
-    public boolean colisaoLuaEmbaixo()
+    public boolean colisaoSolEmbaixo()
     {
         
         float alturaY = 65.000000f; //altura da lua no eixo Y
@@ -754,7 +752,7 @@ public class Jogo implements GLEventListener {
     }//fim do movimentoEsfera()
     
     //getters e setters
-    public float getMovSkateX() 
+    public float getMovNaveX()
     {
         return movSkateX;
     }

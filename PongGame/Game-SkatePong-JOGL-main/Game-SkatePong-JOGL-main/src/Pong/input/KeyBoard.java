@@ -42,17 +42,17 @@ public class KeyBoard implements KeyListener{
             {     
                 
             case setaEsquerda, teclaA:
-                if(jogo.getMovSkateX() > (float)(this.width/14)*-1)
+                if(jogo.getMovNaveX() > (float)(this.width/14)*-1)
                 {                
-                    jogo.setMovSkateX(jogo.getMovSkateX() - 15.0f);
+                    jogo.setMovNaveX(jogo.getMovNaveX() - 15.0f);
                     jogo.setMovCenario(jogo.getMovCenario() + 1);
                 }            
             break;
                 
             case setaDireita, teclaD:
-                if(jogo.getMovSkateX() < (float)(this.width/14))
+                if(jogo.getMovNaveX() < (float)(this.width/14))
                 {
-                    jogo.setMovSkateX(jogo.getMovSkateX() + 15.0f);
+                    jogo.setMovNaveX(jogo.getMovNaveX() + 15.0f);
                     jogo.setMovCenario(jogo.getMovCenario() - 1);
                 }
             break;
@@ -65,17 +65,17 @@ public class KeyBoard implements KeyListener{
             {     
                 
             case setaEsquerda, teclaA:
-                if(jogo.getMovSkateX() > (float)(this.width/10)*-1)
+                if(jogo.getMovNaveX() > (float)(this.width/10)*-1)
                 {                
-                    jogo.setMovSkateX(jogo.getMovSkateX() - 15.0f);
+                    jogo.setMovNaveX(jogo.getMovNaveX() - 15.0f);
                     jogo.setMovCenario(jogo.getMovCenario() + 1);
                 }            
             break;
                 
             case setaDireita, teclaD:
-                if(jogo.getMovSkateX() < (float)(this.width/10))
+                if(jogo.getMovNaveX() < (float)(this.width/10))
                 {
-                    jogo.setMovSkateX(jogo.getMovSkateX() + 15.0f);
+                    jogo.setMovNaveX(jogo.getMovNaveX() + 15.0f);
                     jogo.setMovCenario(jogo.getMovCenario() - 1);
                 }
             break;

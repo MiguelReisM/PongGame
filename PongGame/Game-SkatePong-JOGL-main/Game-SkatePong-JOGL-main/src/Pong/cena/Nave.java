@@ -17,15 +17,15 @@ public class Nave
     public float aspect = (float)(this.width/this.height);
     
     //metodo para desenhar o nave completo
-    public void desenhaSkate(GL2 gl, GLUT glut)
+    public void desenhaNave(GL2 gl, GLUT glut)
     {
         gl.glPushMatrix();
-            skate(gl, glut);
+            nave(gl, glut);
         gl.glPopMatrix();
     }
     
     //desenho do nave
-    public void skate(GL2 gl, GLUT glut)
+    public void nave(GL2 gl, GLUT glut)
     {
         // Configuração da iluminação
         gl.glEnable(GL2.GL_LIGHTING);
