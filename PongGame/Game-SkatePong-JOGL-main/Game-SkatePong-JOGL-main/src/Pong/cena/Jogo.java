@@ -23,12 +23,12 @@ public class Jogo implements GLEventListener {
     public float aspect = (float)(this.width/this.height);
     
     //para movimento do nave e cenário
-    public float movSkateX, movCenario;
+    public float movNaveX, movCenario;
     
     //para movimento da asteroide
-    public float movEsferaX = 0, movEsferaY = 0;
+    public float movAsteroideX = 0, movAsteroideY = 0;
     //para colisão da asteroide com as paredes e com o objeto (lua)
-    public float colisaoEsferaY = 0, colisaoEsferaX = 0;
+    public float colisaoAsteroidY = 0, colisaoAsteroidX = 0;
     //para direção da asteroide (b: baixo, c: cima, e: esquerda, d: direita)
     private char xDirecao, yDirecao = 'b';
     
@@ -149,16 +149,16 @@ public class Jogo implements GLEventListener {
         desenhaTexto2(gl, (int)(width/5.2), (int)(height/1.67), Color.WHITE, "- Você possui 5 tentativas para impedir que o asteroide colida com os humanos.");
         desenhaTexto2(gl, (int)(width/5.2), (int)(height/1.73), Color.WHITE, "- Caso o asteroide consiga passar pela sua nave, uma vida se perde e a Terra perde população.");
         desenhaTexto2(gl, (int)(width/5.2), (int)(height/1.80), Color.WHITE, "- Você ganha 20 pontos a cada colisão de asteroide evitada.");
-        desenhaTexto2(gl, (int)(width/5.2), (int)(height/1.87), Color.WHITE, "- Some 200 pontos e passe de fase onde agora o Sol influência no movimento do asteroide.");
+        desenhaTexto2(gl, (int)(width/5.2), (int)(height/1.87), Color.WHITE, "- Some 200 pontos e passe de fase onde a gravidade do Sol influência no movimento do asteroide.");
         desenhaTexto2(gl, (int)(width/5.2), (int)(height/1.94), Color.WHITE, "- Na 2°, dificuldade maior e pontuação infinita.");
         desenhaTexto1(gl, (int)(width/5.5), (int)(height/2.05), Color.WHITE, "Botões: ");
         desenhaTexto2(gl, (int)(width/5.2), (int)(height/2.15), Color.WHITE, "- \" <- \"/\" -> \"/\" A \"/\" D \": Movem a nave.");
         desenhaTexto2(gl, (int)(width/5.2), (int)(height/2.25), Color.WHITE, "- \" P \": Pausa o jogo.");
-        desenhaTexto2(gl, (int)(width/5.2), (int)(height/2.35), Color.WHITE, "- \" S \": Volta para o menu.");
-        desenhaTexto2(gl, (int)(width/5.2), (int)(height/2.45), Color.WHITE, "- \" J \": Start do jogo.");
-        desenhaTexto2(gl, (int)(width/5.2), (int)(height/2.58), Color.WHITE, "- \" F \": Fecha o jogo.");
-        desenhaTexto1(gl, (int)(width/5.5), (int)(height/2.95), Color.GREEN, "- Aperte \" J \" para começar.");
-        desenhaTexto1(gl, (int)(width/2.8), (int)(height/2.95), Color.RED, " - \" F \" para sair.");
+        desenhaTexto2(gl, (int)(width/5.2), (int)(height/2.35), Color.WHITE, "- \" M \": Volta para o menu.");
+        desenhaTexto2(gl, (int)(width/5.2), (int)(height/2.45), Color.WHITE, "- \" ENTER \": Start do jogo.");
+        desenhaTexto2(gl, (int)(width/5.2), (int)(height/2.58), Color.WHITE, "- \" S \": Fecha o jogo.");
+        desenhaTexto1(gl, (int)(width/5.5), (int)(height/2.95), Color.GREEN, "- Aperte \" ENTER \" para começar.");
+        desenhaTexto1(gl, (int)(width/2.8), (int)(height/2.95), Color.RED, " - \" S \" para sair.");
 
         //se o usuário está no menu, ele tem 5 vidas e sua pontuação zerada
         vidas = 5;
@@ -187,7 +187,7 @@ public class Jogo implements GLEventListener {
         
         //desenha a asteroide com a translação adaptada
         gl.glPushMatrix();
-            gl.glTranslatef(movEsferaX, movEsferaY, 0);
+            gl.glTranslatef(movAsteroideX, movAsteroideY, 0);
             asteroide.draw(gl, glut);
         gl.glPopMatrix();
 
@@ -197,7 +197,7 @@ public class Jogo implements GLEventListener {
         miniMenu(gl, glut);
         
         //contagem da pontuacao na tela
-        desenhaTexto1(gl, (int)(width/2.0), (int)(height/1.07), Color.YELLOW, "Score = ");
+        desenhaTexto1(gl, (int)(width/2.0), (int)(height/1.07), Color.YELLOW, "Pontos = ");
         desenhaTexto1(gl, (int)(width/1.82), (int)(height/1.07), Color.YELLOW, Integer.toString(pontuacao));
         
         
@@ -212,12 +212,12 @@ public class Jogo implements GLEventListener {
         //acionamento do botão pausar
         if(pausar == false) 
         {
-            movimentoEsfera();
+            movimentoAsteroide();
         }
         else 
         {
             desenhaTexto(gl, (int)(width/2.30), (int)(height/1.67), Color.MAGENTA, "PAUSADO");
-            desenhaTexto1(gl, (int)(width/2.2), (int)(height/1.74), Color.GREEN, "Aperte P para voltar.");
+            desenhaTexto1(gl, (int)(width/2.2), (int)(height/1.74), Color.GREEN, "Aperte M para voltar.");
         }
         
         //se atingir 200 de pontuação, passa de fase
@@ -261,7 +261,7 @@ public class Jogo implements GLEventListener {
         
         //desenha a asteroide com a translação adaptada
         gl.glPushMatrix();
-            gl.glTranslatef(movEsferaX, movEsferaY, 0);
+            gl.glTranslatef(movAsteroideX, movAsteroideY, 0);
             asteroide.draw(gl, glut);
         gl.glPopMatrix();
         
@@ -272,7 +272,7 @@ public class Jogo implements GLEventListener {
         miniMenu(gl, glut);
         
         //contagem da pontuacao na tela
-        desenhaTexto1(gl, (int)(width/2.0), (int)(height/1.07), Color.YELLOW, "Score = ");
+        desenhaTexto1(gl, (int)(width/2.0), (int)(height/1.07), Color.YELLOW, "Pontos = ");
         desenhaTexto1(gl, (int)(width/1.82), (int)(height/1.07), Color.YELLOW, Integer.toString(pontuacao));
         
         //desenho da vida (coração) + contagem
@@ -286,12 +286,12 @@ public class Jogo implements GLEventListener {
         //acionamento do botão pausar
         if(pausar == false) 
         {
-            movimentoEsfera();
+            movimentoAsteroide();
         }
         else 
         {
             desenhaTexto(gl, (int)(width/2.30), (int)(height/1.67), Color.MAGENTA, "Pausado");
-            desenhaTexto1(gl, (int)(width/2.2), (int)(height/1.74), Color.GREEN, "Aperte P para voltar.");
+            desenhaTexto1(gl, (int)(width/2.2), (int)(height/1.74), Color.GREEN, "Aperte M para voltar.");
         }
         
         //se as vidas acabarem, mostra tela de fim de jogo
@@ -314,8 +314,8 @@ public class Jogo implements GLEventListener {
         desenhaTexto(gl, (int)(width/2.4), (int)(height/1.5), Color.MAGENTA, "A Terra foi destruída!");
         desenhaTexto1(gl, (int)(width/2.3), (int)(height/1.8), Color.WHITE, "Sua pontuação: ");
         desenhaTexto(gl, (int)(width/2.3), (int)(height/2.2), Color.WHITE, Integer.toString(pontuacao));
-        desenhaTexto1(gl, (int)(width/2.3), (int)(height/2.6), Color.GREEN, "Aperte S para voltar ao menu.");
-        desenhaTexto1(gl, (int)(width/2.3), (int)(height/2.8), Color.RED, "Aperte F para fechar o jogo.");
+        desenhaTexto1(gl, (int)(width/2.3), (int)(height/2.6), Color.GREEN, "Aperte M para voltar ao menu.");
+        desenhaTexto1(gl, (int)(width/2.3), (int)(height/2.8), Color.RED, "Aperte S para fechar o jogo.");
 
         pausar = true;
 
@@ -355,7 +355,7 @@ public class Jogo implements GLEventListener {
     //mostra o mini menu durante o jogo
     public void miniMenu(GL2 gl, GLUT glut)
     {
-        desenhaTexto1(gl, (int)(width/8.0), (int)(height/1.07), Color.GREEN, "\"P\": pausar | \"S\": stop (menu)");
+        desenhaTexto1(gl, (int)(width/8.0), (int)(height/1.07), Color.GREEN, "\"P\": Pausar | \"M\": Menu");
     }
     
     //para desenhar textos do tipo 0
@@ -370,7 +370,7 @@ public class Jogo implements GLEventListener {
         gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
     }
     
-    //para desenhar textos do tipo 1
+    //textos 1
     public void desenhaTexto1(GL2 gl, int xPosicao, int yPosicao, Color cor, String frase)
     {         
         gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
@@ -382,7 +382,7 @@ public class Jogo implements GLEventListener {
         gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
     }
     
-    //para desenhar textos do tipo 2
+    //textos　2
     public void desenhaTexto2(GL2 gl, int xPosicao, int yPosicao, Color cor, String frase)
     {         
         gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
@@ -394,7 +394,7 @@ public class Jogo implements GLEventListener {
         gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
     }
     
-    //desenvolve a luz ambiente
+    //luz ambiente
     public void iluminacaoAmbiente(GL2 gl) 
     {
         float luzAmbiente[] = {0.5f, 0.5f, 0.4f, 1}; //cor
@@ -404,7 +404,7 @@ public class Jogo implements GLEventListener {
         gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_POSITION, posicaoLuz, 0);
     }
     
-    //desenvolve a luz difusa
+    //luz difusa
     public void iluminacaoDifusa(GL2 gl) 
     {
         float luzDifusa[] = {0.8f, 0.8f, 0.8f, 1}; //cor
@@ -414,14 +414,14 @@ public class Jogo implements GLEventListener {
         gl.glLightfv(GL2.GL_LIGHT1, GL2.GL_POSITION, posicaoLuz, 0);
     }
     
-    //liga a luz ambiente (0)
+    //luz ambiente on
     public void ligaLuz0(GL2 gl) 
     {
         // habilita a definicao da cor do material a partir da cor corrente
         gl.glEnable(GL2.GL_COLOR_MATERIAL);
-        // habilita o uso da ilumina��o na cena
+        // ilumina cena
         gl.glEnable(GL2.GL_LIGHTING);
-        // habilita a luz 
+        // luz on
         gl.glEnable(GL2.GL_LIGHT0);
         //Especifica o Modelo de tonalizacao a ser utilizado 
         //GL_FLAT -> modelo de tonalizacao flat 
@@ -429,7 +429,7 @@ public class Jogo implements GLEventListener {
         gl.glShadeModel(GL2.GL_SMOOTH);
     }
     
-    //liga a luz difusa (1)
+    //luz difusa on
     public void ligaLuz1(GL2 gl) 
     {
         // habilita a definicao da cor do material a partir da cor corrente
@@ -444,14 +444,14 @@ public class Jogo implements GLEventListener {
         gl.glShadeModel(GL2.GL_SMOOTH);
     }
 
-    //desliga a luz ambiente (0)
+    //luz ambiente
     public void desligaLuz0(GL2 gl) 
     {
         //desabilita o ponto de luz
         gl.glDisable(GL2.GL_LIGHT0);
     }
     
-    //desliga a luz difusa (1)
+    //luz difusa
     public void desligaLuz1(GL2 gl) 
     {
         //desabilita o ponto de luz
@@ -521,11 +521,11 @@ public class Jogo implements GLEventListener {
     //método para colisão da asteroide com o nave na extremidade da esquerda
     public boolean colisaoEsquerdaNave()
     {
-        float limiteEsqSkate = movSkateX - 19.0f;//limite do tamanho do nave na esquerda
-        float esquerdaSkate = movSkateX - 17.0f;//um pouco abaixo do limite
+        float limiteEsqSkate = movNaveX - 19.0f;//limite do tamanho do nave na esquerda
+        float esquerdaSkate = movNaveX - 17.0f;//um pouco abaixo do limite
         //se o movimento da asteroide no eixo x for maior ou igual ao limite do nave
         //e menor ou igual um pouco abaixo do limite, ela colide na ponta esquerda
-        if(movEsferaX >= limiteEsqSkate && movEsferaX <= esquerdaSkate)
+        if(movAsteroideX >= limiteEsqSkate && movAsteroideX <= esquerdaSkate)
         {
             return true;        
         }
@@ -536,11 +536,11 @@ public class Jogo implements GLEventListener {
     //método para colisão da asteroide com o meio do nave
     public boolean colisaoMeioNave()
     {
-        float limiteEsqSkate = movSkateX - 17.0f;//limite do tamanho do nave na esquerda
-        float limiteDirSkate = movSkateX + 17.0f;//limite do tamanho do nave na direita
+        float limiteEsqSkate = movNaveX - 17.0f;//limite do tamanho do nave na esquerda
+        float limiteDirSkate = movNaveX + 17.0f;//limite do tamanho do nave na direita
         //se o movimento da asteroide no eixo x for maior ou igual ao limite do nave na esq
         //e maior igual ao da direita, ela colide no meio
-        if(movEsferaX >= limiteEsqSkate && movEsferaX <= limiteDirSkate)
+        if(movAsteroideX >= limiteEsqSkate && movAsteroideX <= limiteDirSkate)
         {
             return true;        
         }
@@ -551,11 +551,11 @@ public class Jogo implements GLEventListener {
     //método para colisão da asteroide com o nave na extremidade da direita
     public boolean colisaoDireitaNave()
     {
-        float limiteDirSkate = movSkateX + 19; //limite do tamanho do nave na direita
-        float direitaSkate = movSkateX + 17; //um pouco abaixo do limite
+        float limiteDirSkate = movNaveX + 19; //limite do tamanho do nave na direita
+        float direitaSkate = movNaveX + 17; //um pouco abaixo do limite
         //se o movimento da asteroide no eixo x for menor ou igual ao limite do nave
         //e maior igual um pouco abaixo do limite, ela colide na ponta direita
-        if(movEsferaX <= limiteDirSkate && movEsferaX >= direitaSkate) 
+        if(movAsteroideX <= limiteDirSkate && movAsteroideX >= direitaSkate)
         {
             return true;
         }
@@ -573,7 +573,7 @@ public class Jogo implements GLEventListener {
         
         //se o movimento da asteroide no eixo X for menor que o limite da direira, maior que o da esquerda
         //e o movimento da asteroide no eixo Y for maior ou igual a altura, retorna verdadeiro
-        if(movEsferaX < limiteDireita && movEsferaX > limiteEsquerda && movEsferaY >= alturaY)
+        if(movAsteroideX < limiteDireita && movAsteroideX > limiteEsquerda && movAsteroideY >= alturaY)
         {
             return true;     
         }
@@ -584,7 +584,7 @@ public class Jogo implements GLEventListener {
     }
     
     //método para colisão da asteroide com a esquerda da lua
-    public boolean colisaoLuaLado() 
+    public boolean colisaoSolLado()
     {
         float alturaLateralX = 70.000000f;//localizacao da altura da lateral da lua no eixo x
         float limiteSuperior = 175.000000f;//limite superior da lateral da lua
@@ -592,7 +592,7 @@ public class Jogo implements GLEventListener {
         
         //se o movimento da asteroide no eixo Y for menor que o limite da superior, maior que o inferior
         //e o movimento da asteroide no eixo X for maior ou igual a altura da lateral da lua, retorna verdadeiro
-        if(movEsferaY < limiteSuperior && movEsferaY > limiteInferior && movEsferaX >= alturaLateralX)
+        if(movAsteroideY < limiteSuperior && movAsteroideY > limiteInferior && movAsteroideX >= alturaLateralX)
         {
             return true;
         }
@@ -605,13 +605,13 @@ public class Jogo implements GLEventListener {
     //quando a asteroide passa da barra, outra é gerada
     public void reset() 
     {
-        this.movEsferaY = this.yMax;
-        this.movEsferaX = (float) Math.random();
+        this.movAsteroideY = this.yMax;
+        this.movAsteroideX = (float) Math.random();
         geradorEsfera();
     }
 
     //método para movimentar a asteroide
-    public void movimentoEsfera() 
+    public void movimentoAsteroide()
     {
         //movimento da asteroide no eixo x
         switch (this.xDirecao) 
@@ -620,21 +620,21 @@ public class Jogo implements GLEventListener {
             case 'e' -> 
             {   
                 //se estiver na fase 2, indo para esquerda, pra cima e colidir embaixo da lua, 
-                if(this.fase == 2 && yDirecao == 'c' && colisaoLuaEmbaixo()) 
+                if(this.fase == 2 && yDirecao == 'c' && colisaoSolEmbaixo())
                 {
                     //muda a direcao da asteroide no eixo y
                     mudaDirecaoY();
                 }
                 
                 //enquanto o movimento da asteroide for maior que o limite da tela na esquerda
-                if (this.movEsferaX > -92*this.aspect) 
+                if (this.movAsteroideX > -92*this.aspect)
                 {
                     //decrementa o valor da variavel de mov no eixo x com a velocidade, que sera usada no translate
-                    this.movEsferaX -= velocidadeJogo;
+                    this.movAsteroideX -= velocidadeJogo;
                 }
                 
                 //se o movimento da asteroide atingir a parede da esquerda,
-                if (this.movEsferaX == -92*this.aspect && this.xDirecao == 'e' || this.movEsferaX <= -92*this.aspect && this.xDirecao == 'e') 
+                if (this.movAsteroideX == -92*this.aspect && this.xDirecao == 'e' || this.movAsteroideX <= -92*this.aspect && this.xDirecao == 'e')
                 {
                     //muda a direção da asteroide no eixo x
                     mudaDirecaoX();
@@ -645,35 +645,35 @@ public class Jogo implements GLEventListener {
             case 'd' -> 
             {
                 //se estiver na fase 2, indo para direita, para baixo e colidir com a lateral da lua,
-                if(this.fase == 2 && yDirecao == 'b' && colisaoLuaLado()) 
+                if(this.fase == 2 && yDirecao == 'b' && colisaoSolLado()) 
                 {
                     //muda a direção de x
                     mudaDirecaoX();
                 }
 
                     //se estiver na fase 2, indo para direita, pra cima e colidir embaixo da lua,
-                    else if(this.fase == 2 && yDirecao == 'c' && colisaoLuaEmbaixo()) 
+                    else if(this.fase == 2 && yDirecao == 'c' && colisaoSolEmbaixo())
                     {
                         //muda a direção de y
                         mudaDirecaoY();
                     }
                 
                     //se estiver na fase 2, indo para direita, pra cima e colidir com a lateral da lua,
-                    else if(this.fase == 2 && yDirecao == 'c' && colisaoLuaLado()) 
+                    else if(this.fase == 2 && yDirecao == 'c' && colisaoSolLado()) 
                     {
                         //muda a direção de x
                         mudaDirecaoX();
                     }
                 
                 //enquanto o movimento for menor que a extremidade da parede da direira e tiver indo pra direita,
-                if (this.movEsferaX < 92*this.aspect && this.xDirecao == 'd') 
+                if (this.movAsteroideX < 92*this.aspect && this.xDirecao == 'd')
                 {
                     //incrementa o valor da variavel de mov no eixo x com a velocidade, que sera usada no translate
-                    this.movEsferaX += velocidadeJogo;
+                    this.movAsteroideX += velocidadeJogo;
                 }
                 
                 //se o movimento da asteroide atingir a extremidade da parede da direita,
-                if (this.movEsferaX == 92*this.aspect && this.xDirecao == 'd' || this.movEsferaX >= 92*this.aspect && this.xDirecao == 'd') 
+                if (this.movAsteroideX == 92*this.aspect && this.xDirecao == 'd' || this.movAsteroideX >= 92*this.aspect && this.xDirecao == 'd')
                 {
                     //muda de posição
                     this.mudaDirecaoX();
@@ -690,7 +690,7 @@ public class Jogo implements GLEventListener {
             {
                 
                 //se a asteroide estiver na mesma altura que o nave e colidir com a ponta esquerda do nave
-                if (this.movEsferaY <= -76*this.aspect && colisaoEsquerdaSkate()) 
+                if (this.movAsteroideY <= -76*this.aspect && colisaoEsquerdaNave())
                 {
                     //muda a direcao de y, de x e soma 20 na pontuacao
                     mudaDirecaoY();
@@ -699,7 +699,7 @@ public class Jogo implements GLEventListener {
                 }
                 
                     //se a asteroide estiver na mesma altura que o nave e colidir com a ponta direita
-                    else if (this.movEsferaY <= -76*this.aspect && colisaoDireitaSkate()) 
+                    else if (this.movAsteroideY <= -76*this.aspect && colisaoDireitaNave())
                     {
                         //muda a direcao de y, de x e soma 20 na pontuacao
                         mudaDirecaoY();
@@ -708,7 +708,7 @@ public class Jogo implements GLEventListener {
                     }
                 
                     //se a asteroide estiver na mesma altura que o nave e colidir com o meio
-                    else if (this.movEsferaY <= -76*this.aspect && colisaoMeioSkate()) 
+                    else if (this.movAsteroideY <= -76*this.aspect && colisaoMeioNave())
                     {
                         //muda a direcao de y e soma 20 na pontuacao
                         mudaDirecaoY();
@@ -716,7 +716,7 @@ public class Jogo implements GLEventListener {
                     }
                 
                 //se a asteroide passar a altura do nave, logicamente ela nao colide
-                else if (this.movEsferaY <= -90*this.aspect) 
+                else if (this.movAsteroideY <= -90*this.aspect)
                 {
                     //o movimento da asteroide reinicia e uma vida eh descontada
                     reset();
@@ -727,7 +727,7 @@ public class Jogo implements GLEventListener {
                 else 
                 {
                     //decrementa o valor da variavel de mov no eixo y com a velocidade, que sera usada no translate
-                    movEsferaY -= velocidadeJogo;
+                    movAsteroideY -= velocidadeJogo;
                 }
             }//fim do case b
             
@@ -735,13 +735,13 @@ public class Jogo implements GLEventListener {
             case 'c' -> 
             {                             
                 //enquanto nao atingir o teto, 
-                if (this.movEsferaY < (92*this.aspect)) 
+                if (this.movAsteroideY < (92*this.aspect))
                 { 
                     //incrementa o valor da variavel de mov no eixo y com a velocidade, que sera usada no translate
-                    this.movEsferaY += velocidadeJogo;
+                    this.movAsteroideY += velocidadeJogo;
                 }
                 //se atingir o teto, muda a direcao
-                if (this.movEsferaY >= (92*this.aspect)) 
+                if (this.movAsteroideY >= (92*this.aspect))
                 { 
                     mudaDirecaoY();
                 }
@@ -754,12 +754,12 @@ public class Jogo implements GLEventListener {
     //getters e setters
     public float getMovNaveX()
     {
-        return movSkateX;
+        return movNaveX;
     }
 
-    public void setMovSkateX(float movSkateX) 
+    public void setMovNaveX(float movNaveX)
     {
-        this.movSkateX = movSkateX;
+        this.movNaveX = movNaveX;
     }
 
     public float getMovCenario() 

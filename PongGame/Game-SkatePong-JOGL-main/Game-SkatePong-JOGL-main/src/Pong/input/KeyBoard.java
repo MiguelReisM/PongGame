@@ -11,11 +11,10 @@ public class KeyBoard implements KeyListener{
     
     private final int setaEsquerda = 149;
     private final int setaDireita = 151;
-    private final int teclaJ = 75;
-    private final int teclaj = 74;
+    private final int teclaENTER = 13;
     private final int teclaP = 80;
+    private final int teclaM = 77;
     private final int teclaS = 83;
-    private final int teclaF = 70;
     private final int teclaA = 65;
     private final int teclaD = 68;
     
@@ -85,7 +84,7 @@ public class KeyBoard implements KeyListener{
             {
                 
             
-            case teclaj, teclaJ:
+            case teclaENTER:
                 if(jogo.getFase() == 0)
                     jogo.setFase(1);
             
@@ -96,11 +95,11 @@ public class KeyBoard implements KeyListener{
                     jogo.setPausar(false);
             break;
             
-            case teclaS:
+            case teclaM:
                 jogo.setFase(0);
             break; 
             
-            case teclaF:
+            case teclaS:
                 if(jogo.getFase() == 3 || jogo.getFase() == 0)
                     System.exit(0);           
             break;
