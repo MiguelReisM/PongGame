@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="SkatePong">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/Game-SkatePong-JOGL-main/dist/SkatePong.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
