@@ -3,7 +3,7 @@ Skate Pong
 
 Como executar o jogo: 
 
-Execute o arquivo SkatePong.jar localizado em "SkatePong">"dist" ou abra o projeto do jogo em sua IDE (preferência Netbeans 17), abra o pacote Pong.cena e execute o arquivo class "Renderer.java".
+Execute o arquivo SkatePong.jar localizado em "SkatePong">"dist" ou abra o projeto do jogo em sua IDE (preferência Netbeans 17), abra o pacote Pong.jogo e execute o arquivo class "Renderer.java".
 (Inclua a biblioteca do JOGL (dentro de dist>lib) no projeto e deixe a versão do java 19 ou a mais atualizada)
 ----------
 

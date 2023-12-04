@@ -1,6 +1,6 @@
 package Pong.cena;
 
-import static Pong.cena.Cena.screenSize;
+import static Pong.cena.Jogo.screenSize;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.util.gl2.GLUT;
 
@@ -126,7 +126,7 @@ public class Cenarios {
 
             gl.glPushMatrix();
             gl.glTranslatef(x, y, 0);
-            glut.glutSolidSphere(0.1f * this.aspect, 5, 5); // Desenha uma pequena esfera como estrela
+            glut.glutSolidSphere(0.1f * this.aspect, 5, 5); // Desenha uma pequena asteroide como estrela
             gl.glPopMatrix();
         }
 
@@ -219,7 +219,7 @@ public class Cenarios {
 
             gl.glPushMatrix();
             gl.glTranslatef(x, y, 0);
-            glut.glutSolidSphere(0.1f * this.aspect, 5, 5); // Desenha uma pequena esfera como estrela
+            glut.glutSolidSphere(0.1f * this.aspect, 5, 5); // Desenha uma pequena asteroide como estrela
             gl.glPopMatrix();
         }
 
@@ -303,7 +303,7 @@ public class Cenarios {
         gl.glPopMatrix();
     }
 
-    // Método para desenhar a lua como uma esfera
+    // Método para desenhar a lua como uma asteroide
     void drawLua(GL2 gl, GLUT glut) {
         gl.glPushMatrix();
         gl.glTranslatef(65 * this.aspect, 65 * this.aspect, 15 * this.aspect); // Posição da lua

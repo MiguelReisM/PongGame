@@ -1,12 +1,13 @@
 package Pong.input;
 
-import Pong.cena.Cena;
-import static Pong.cena.Cena.screenSize;
+import Pong.cena.Jogo;
+import static Pong.cena.Jogo.screenSize;
+
 import com.jogamp.newt.event.KeyEvent;
 import com.jogamp.newt.event.KeyListener;
 
 public class KeyBoard implements KeyListener{
-    private Cena cena;
+    private Jogo jogo;
     
     private final int setaEsquerda = 149;
     private final int setaDireita = 151;
@@ -24,8 +25,8 @@ public class KeyBoard implements KeyListener{
     public double height = screenSize.getHeight();
     public float aspect = (float)(this.width/this.height);
     
-    public KeyBoard(Cena cena){
-        this.cena = cena;
+    public KeyBoard(Jogo jogo){
+        this.jogo = jogo;
     }
     
     @Override
@@ -41,18 +42,18 @@ public class KeyBoard implements KeyListener{
             {     
                 
             case setaEsquerda, teclaA:
-                if(cena.getMovSkateX() > (float)(this.width/14)*-1)
+                if(jogo.getMovSkateX() > (float)(this.width/14)*-1)
                 {                
-                    cena.setMovSkateX(cena.getMovSkateX() - 15.0f);                    
-                    cena.setMovCenario(cena.getMovCenario() + 1); 
+                    jogo.setMovSkateX(jogo.getMovSkateX() - 15.0f);
+                    jogo.setMovCenario(jogo.getMovCenario() + 1);
                 }            
             break;
                 
             case setaDireita, teclaD:
-                if(cena.getMovSkateX() < (float)(this.width/14))
+                if(jogo.getMovSkateX() < (float)(this.width/14))
                 {
-                    cena.setMovSkateX(cena.getMovSkateX() + 15.0f);
-                    cena.setMovCenario(cena.getMovCenario() - 1);
+                    jogo.setMovSkateX(jogo.getMovSkateX() + 15.0f);
+                    jogo.setMovCenario(jogo.getMovCenario() - 1);
                 }
             break;
             }
@@ -64,18 +65,18 @@ public class KeyBoard implements KeyListener{
             {     
                 
             case setaEsquerda, teclaA:
-                if(cena.getMovSkateX() > (float)(this.width/10)*-1)
+                if(jogo.getMovSkateX() > (float)(this.width/10)*-1)
                 {                
-                    cena.setMovSkateX(cena.getMovSkateX() - 15.0f);                    
-                    cena.setMovCenario(cena.getMovCenario() + 1); 
+                    jogo.setMovSkateX(jogo.getMovSkateX() - 15.0f);
+                    jogo.setMovCenario(jogo.getMovCenario() + 1);
                 }            
             break;
                 
             case setaDireita, teclaD:
-                if(cena.getMovSkateX() < (float)(this.width/10))
+                if(jogo.getMovSkateX() < (float)(this.width/10))
                 {
-                    cena.setMovSkateX(cena.getMovSkateX() + 15.0f);
-                    cena.setMovCenario(cena.getMovCenario() - 1);
+                    jogo.setMovSkateX(jogo.getMovSkateX() + 15.0f);
+                    jogo.setMovCenario(jogo.getMovCenario() - 1);
                 }
             break;
             }
@@ -85,22 +86,22 @@ public class KeyBoard implements KeyListener{
                 
             
             case teclaj, teclaJ:
-                if(cena.getFase() == 0)
-                    cena.setFase(1);
+                if(jogo.getFase() == 0)
+                    jogo.setFase(1);
             
             case teclaP:
-                if(cena.isPausar() == false)
-                    cena.setPausar(true);
+                if(jogo.isPausar() == false)
+                    jogo.setPausar(true);
                 else
-                    cena.setPausar(false);
+                    jogo.setPausar(false);
             break;
             
             case teclaS:
-                cena.setFase(0);
+                jogo.setFase(0);
             break; 
             
             case teclaF:
-                if(cena.getFase() == 3 || cena.getFase() == 0)
+                if(jogo.getFase() == 3 || jogo.getFase() == 0)
                     System.exit(0);           
             break;
             }    

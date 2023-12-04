@@ -1,20 +1,20 @@
 package Pong.cena;
 
-import static Pong.cena.Cena.screenSize;
+import static Pong.cena.Jogo.screenSize;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.util.gl2.GLUT;
 
-public class Esfera {
+public class Asteroide {
 
     // Construtor
-    public Esfera() {}
+    public Asteroide() {}
 
     // Dados para renderização dos objetos
     public double width = screenSize.getWidth();
     public double height = screenSize.getHeight();
     public float aspect = (float)(this.width/this.height);
 
-    // Método para desenhar a esfera
+    // Método para desenhar a asteroide
     public void draw(GL2 gl, GLUT glut) {
         // Configuração da iluminação
         gl.glEnable(GL2.GL_LIGHTING);
@@ -32,9 +32,9 @@ public class Esfera {
 
         // Define a cor principal como cinza
         gl.glColor3f(0.5f, 0.5f, 0.5f); // Define a cor como cinza
-        gl.glTranslatef(0, 0, 15 * this.aspect); // Translação para posicionar a esfera
+        gl.glTranslatef(0, 0, 15 * this.aspect); // Translação para posicionar a asteroide
 
-        // Desenha a esfera principal
+        // Desenha a asteroide principal
         glut.glutSolidSphere(8 * this.aspect, 50, 50);
 
         // Define a cor como preto para os círculos

@@ -4,11 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/felip/Desktop/SkatePong1/SkatePong/SkatePong/src/Pong/input/KeyBoard.java</file>
-            <file>file:/C:/Users/felip/Desktop/SkatePong1/SkatePong/SkatePong/src/Pong/cena/Cenarios.java</file>
-            <file>file:/C:/Users/felip/Desktop/SkatePong1/SkatePong/SkatePong/src/Pong/cena/Cena.java</file>
-            <file>file:/C:/Users/felip/Desktop/SkatePong1/SkatePong/SkatePong/src/Pong/cena/Skate.java</file>
-            <file>file:/C:/Users/felip/Desktop/SkatePong1/SkatePong/SkatePong/src/Pong/cena/Renderer.java</file>
-            <file>file:/C:/Users/felip/Desktop/SkatePong1/SkatePong/SkatePong/src/Pong/cena/Esfera.java</file>
+            <file>file:/C:/Users/felip/Desktop/SkatePong1/SkatePong/SkatePong/src/Pong/jogo/Cenarios.java</file>
+            <file>file:/C:/Users/felip/Desktop/SkatePong1/SkatePong/SkatePong/src/Pong/jogo/Cena.java</file>
+            <file>file:/C:/Users/felip/Desktop/SkatePong1/SkatePong/SkatePong/src/Pong/jogo/Skate.java</file>
+            <file>file:/C:/Users/felip/Desktop/SkatePong1/SkatePong/SkatePong/src/Pong/jogo/Renderer.java</file>
+            <file>file:/C:/Users/felip/Desktop/SkatePong1/SkatePong/SkatePong/src/Pong/jogo/Esfera.java</file>
         </group>
     </open-files>
 </project-private>

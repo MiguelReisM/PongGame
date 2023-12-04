@@ -10,7 +10,7 @@ import Pong.input.KeyBoard;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
-public class Renderer {
+public class Renderizar {
     
     //utlização de biblioteca para captar o tamanho da tela automaticamente
     public static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -30,11 +30,11 @@ public class Renderer {
         window.setSize(screenWidth, screenHeight);
         window.setResizable(false);
 
-        Cena cena = new Cena();
+        Jogo jogo = new Jogo();
 
-        window.addGLEventListener(cena); //adiciona a Cena a Janela
-        //Habilita o teclado : cena
-        window.addKeyListener(new KeyBoard(cena));
+        window.addGLEventListener(jogo); //adiciona a Jogo a Janela
+        //Habilita o teclado : jogo
+        window.addKeyListener(new KeyBoard(jogo));
 
         //window.requestFocus();
         FPSAnimator animator = new FPSAnimator(window, 60);

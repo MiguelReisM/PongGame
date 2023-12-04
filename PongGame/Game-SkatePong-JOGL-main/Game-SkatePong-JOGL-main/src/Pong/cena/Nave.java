@@ -1,23 +1,22 @@
 package Pong.cena;
 
-import static Pong.cena.Cena.screenSize;
+import static Pong.cena.Jogo.screenSize;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.util.gl2.GLUT;
-import com.jogamp.opengl.glu.GLU;
 
 
-public class Skate 
+public class Nave
 {
 
     //construtor
-    public Skate() {}
+    public Nave() {}
      
     //dados para renderização dos objetos
     public double width = screenSize.getWidth();
     public double height = screenSize.getHeight();
     public float aspect = (float)(this.width/this.height);
     
-    //metodo para desenhar o skate completo
+    //metodo para desenhar o nave completo
     public void desenhaSkate(GL2 gl, GLUT glut)
     {
         gl.glPushMatrix();
@@ -25,7 +24,7 @@ public class Skate
         gl.glPopMatrix();
     }
     
-    //desenho do skate
+    //desenho do nave
     public void skate(GL2 gl, GLUT glut)
     {
         // Configuração da iluminação

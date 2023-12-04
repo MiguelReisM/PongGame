@@ -11,7 +11,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
 
-public class Cena implements GLEventListener {
+public class Jogo implements GLEventListener {
 
     //variaveis para controle do SRU
     private float xMin, xMax, yMin, yMax, zMin, zMax; 
@@ -22,17 +22,17 @@ public class Cena implements GLEventListener {
     public double height = screenSize.getHeight();
     public float aspect = (float)(this.width/this.height);
     
-    //para movimento do skate e cenário
+    //para movimento do nave e cenário
     public float movSkateX, movCenario;
     
-    //para movimento da esfera
+    //para movimento da asteroide
     public float movEsferaX = 0, movEsferaY = 0;
-    //para colisão da esfera com as paredes e com o objeto (lua)
+    //para colisão da asteroide com as paredes e com o objeto (lua)
     public float colisaoEsferaY = 0, colisaoEsferaX = 0;
-    //para direção da esfera (b: baixo, c: cima, e: esquerda, d: direita)
+    //para direção da asteroide (b: baixo, c: cima, e: esquerda, d: direita)
     private char xDirecao, yDirecao = 'b';
     
-    //velocidade do jogo (velocidade da translação da esfera)
+    //velocidade do jogo (velocidade da translação da asteroide)
     private float velocidadeJogo = 3.5f;
     //para determinar a fase do jogo (0: menu inicial)
     public int fase = 0;
@@ -52,8 +52,8 @@ public class Cena implements GLEventListener {
     GLU glu;
 
     //Chamadas dos objetos de outros classes
-    Esfera esfera = new Esfera();
-    Skate skate = new Skate();
+    Asteroide asteroide = new Asteroide();
+    Nave nave = new Nave();
     Cenarios cenarios = new Cenarios();
 
     @Override
@@ -137,7 +137,7 @@ public class Cena implements GLEventListener {
 
         gl.glPushMatrix();
 
-        // Esfera com cor de piscina
+        // Asteroide com cor de piscina
         gl.glColor3f(0.5f, 0.7f, 1.0f); // Azul claro como cor de piscina
         gl.glTranslatef(50 * this.aspect, 2 * this.aspect, 120 * this.aspect);
         glut.glutSolidSphere(40 * this.aspect, 50, 50);
@@ -184,13 +184,13 @@ public class Cena implements GLEventListener {
         //desenha barra com a movimentação adaptada
         gl.glPushMatrix();
             gl.glTranslatef(movSkateX, 0, 0);
-            skate.desenhaSkate(gl, glut);
+            nave.desenhaSkate(gl, glut);
         gl.glPopMatrix();
         
-        //desenha a esfera com a translação adaptada
+        //desenha a asteroide com a translação adaptada
         gl.glPushMatrix();
             gl.glTranslatef(movEsferaX, movEsferaY, 0);
-            esfera.draw(gl, glut);
+            asteroide.draw(gl, glut);
         gl.glPopMatrix();
 
         velocidadeJogo = 3.5f;
@@ -258,13 +258,13 @@ public class Cena implements GLEventListener {
         //desenha barra com a movimentação adaptada
         gl.glPushMatrix();
             gl.glTranslatef(movSkateX, 0, 0);
-            skate.desenhaSkate(gl, glut);
+            nave.desenhaSkate(gl, glut);
         gl.glPopMatrix();
         
-        //desenha a esfera com a translação adaptada
+        //desenha a asteroide com a translação adaptada
         gl.glPushMatrix();
             gl.glTranslatef(movEsferaX, movEsferaY, 0);
-            esfera.draw(gl, glut);
+            asteroide.draw(gl, glut);
         gl.glPopMatrix();
         
         //velocidade do jogo aumentada 
@@ -365,7 +365,7 @@ public class Cena implements GLEventListener {
     {         
         gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
         //Retorna a largura e altura da janela
-        textRenderer.beginRendering(Renderer.screenWidth, Renderer.screenHeight);       
+        textRenderer.beginRendering(Renderizar.screenWidth, Renderizar.screenHeight);
         textRenderer.setColor(cor);
         textRenderer.draw(frase, xPosicao, yPosicao);
         textRenderer.endRendering();
@@ -377,7 +377,7 @@ public class Cena implements GLEventListener {
     {         
         gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
         //Retorna a largura e altura da janela
-        textRenderer1.beginRendering(Renderer.screenWidth, Renderer.screenHeight);       
+        textRenderer1.beginRendering(Renderizar.screenWidth, Renderizar.screenHeight);
         textRenderer1.setColor(cor);
         textRenderer1.draw(frase, xPosicao, yPosicao);
         textRenderer1.endRendering();
@@ -389,7 +389,7 @@ public class Cena implements GLEventListener {
     {         
         gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
         //Retorna a largura e altura da janela
-        textRenderer2.beginRendering(Renderer.screenWidth, Renderer.screenHeight);       
+        textRenderer2.beginRendering(Renderizar.screenWidth, Renderizar.screenHeight);
         textRenderer2.setColor(cor);
         textRenderer2.draw(frase, xPosicao, yPosicao);
         textRenderer2.endRendering();
@@ -485,7 +485,7 @@ public class Cena implements GLEventListener {
     @Override
     public void dispose(GLAutoDrawable drawable) {}
 
-    //método que altera a posição da esfera no eixo x aleatoriamente na parte superior da tela (quando ela não colide com a barra)
+    //método que altera a posição da asteroide no eixo x aleatoriamente na parte superior da tela (quando ela não colide com a barra)
     public void geradorEsfera() 
     {
         if ((-50*this.aspect) + (Math.random() * this.xMax) > 0) {
@@ -495,7 +495,7 @@ public class Cena implements GLEventListener {
         }
     }
 
-    //altera a direção da esfera no eixo X (d: direita e e: esquerda)
+    //altera a direção da asteroide no eixo X (d: direita e e: esquerda)
     public void mudaDirecaoX() 
     {
         if (this.xDirecao == 'd') {
@@ -505,7 +505,7 @@ public class Cena implements GLEventListener {
         }
     }
 
-    //altera a direção da esfera no eixo Y (b: baixo e c: cima)
+    //altera a direção da asteroide no eixo Y (b: baixo e c: cima)
     public void mudaDirecaoY() 
     {
         if (this.yDirecao == 'b') 
@@ -518,14 +518,14 @@ public class Cena implements GLEventListener {
         }
     }
 
-    //o skate foi "dividido" em três para alterar a direção da esfera caso colidir em diferentes extremidades
+    //o nave foi "dividido" em três para alterar a direção da asteroide caso colidir em diferentes extremidades
    
-    //método para colisão da esfera com o skate na extremidade da esquerda
+    //método para colisão da asteroide com o nave na extremidade da esquerda
     public boolean colisaoEsquerdaSkate() 
     {
-        float limiteEsqSkate = movSkateX - 19.0f;//limite do tamanho do skate na esquerda
+        float limiteEsqSkate = movSkateX - 19.0f;//limite do tamanho do nave na esquerda
         float esquerdaSkate = movSkateX - 17.0f;//um pouco abaixo do limite
-        //se o movimento da esfera no eixo x for maior ou igual ao limite do skate 
+        //se o movimento da asteroide no eixo x for maior ou igual ao limite do nave
         //e menor ou igual um pouco abaixo do limite, ela colide na ponta esquerda
         if(movEsferaX >= limiteEsqSkate && movEsferaX <= esquerdaSkate)
         {
@@ -535,12 +535,12 @@ public class Cena implements GLEventListener {
             return false;            
     }
     
-    //método para colisão da esfera com o meio do skate
+    //método para colisão da asteroide com o meio do nave
     public boolean colisaoMeioSkate() 
     {
-        float limiteEsqSkate = movSkateX - 17.0f;//limite do tamanho do skate na esquerda
-        float limiteDirSkate = movSkateX + 17.0f;//limite do tamanho do skate na direita
-        //se o movimento da esfera no eixo x for maior ou igual ao limite do skate na esq 
+        float limiteEsqSkate = movSkateX - 17.0f;//limite do tamanho do nave na esquerda
+        float limiteDirSkate = movSkateX + 17.0f;//limite do tamanho do nave na direita
+        //se o movimento da asteroide no eixo x for maior ou igual ao limite do nave na esq
         //e maior igual ao da direita, ela colide no meio
         if(movEsferaX >= limiteEsqSkate && movEsferaX <= limiteDirSkate)
         {
@@ -550,12 +550,12 @@ public class Cena implements GLEventListener {
             return false;            
     }
  
-    //método para colisão da esfera com o skate na extremidade da direita
+    //método para colisão da asteroide com o nave na extremidade da direita
     public boolean colisaoDireitaSkate() 
     {
-        float limiteDirSkate = movSkateX + 19; //limite do tamanho do skate na direita
+        float limiteDirSkate = movSkateX + 19; //limite do tamanho do nave na direita
         float direitaSkate = movSkateX + 17; //um pouco abaixo do limite
-        //se o movimento da esfera no eixo x for menor ou igual ao limite do skate 
+        //se o movimento da asteroide no eixo x for menor ou igual ao limite do nave
         //e maior igual um pouco abaixo do limite, ela colide na ponta direita
         if(movEsferaX <= limiteDirSkate && movEsferaX >= direitaSkate) 
         {
@@ -565,7 +565,7 @@ public class Cena implements GLEventListener {
             return false;
     }
     
-    //método para colisão da esfera com a parte inferior da lua
+    //método para colisão da asteroide com a parte inferior da lua
     public boolean colisaoLuaEmbaixo()
     {
         
@@ -573,8 +573,8 @@ public class Cena implements GLEventListener {
         float limiteDireita = 175.000000f; //limite da direita da lua
         float limiteEsquerda = 80.000000f; //limite da esquerda da lua
         
-        //se o movimento da esfera no eixo X for menor que o limite da direira, maior que o da esquerda
-        //e o movimento da esfera no eixo Y for maior ou igual a altura, retorna verdadeiro
+        //se o movimento da asteroide no eixo X for menor que o limite da direira, maior que o da esquerda
+        //e o movimento da asteroide no eixo Y for maior ou igual a altura, retorna verdadeiro
         if(movEsferaX < limiteDireita && movEsferaX > limiteEsquerda && movEsferaY >= alturaY)
         {
             return true;     
@@ -585,15 +585,15 @@ public class Cena implements GLEventListener {
         
     }
     
-    //método para colisão da esfera com a esquerda da lua 
+    //método para colisão da asteroide com a esquerda da lua
     public boolean colisaoLuaLado() 
     {
         float alturaLateralX = 70.000000f;//localizacao da altura da lateral da lua no eixo x
         float limiteSuperior = 175.000000f;//limite superior da lateral da lua
         float limiteInferior = 65.000000f;//limite inferior da lateral da lua
         
-        //se o movimento da esfera no eixo Y for menor que o limite da superior, maior que o inferior
-        //e o movimento da esfera no eixo X for maior ou igual a altura da lateral da lua, retorna verdadeiro
+        //se o movimento da asteroide no eixo Y for menor que o limite da superior, maior que o inferior
+        //e o movimento da asteroide no eixo X for maior ou igual a altura da lateral da lua, retorna verdadeiro
         if(movEsferaY < limiteSuperior && movEsferaY > limiteInferior && movEsferaX >= alturaLateralX)
         {
             return true;
@@ -604,7 +604,7 @@ public class Cena implements GLEventListener {
             return false;       
     }
     
-    //quando a esfera passa da barra, outra é gerada
+    //quando a asteroide passa da barra, outra é gerada
     public void reset() 
     {
         this.movEsferaY = this.yMax;
@@ -612,38 +612,38 @@ public class Cena implements GLEventListener {
         geradorEsfera();
     }
 
-    //método para movimentar a esfera
+    //método para movimentar a asteroide
     public void movimentoEsfera() 
     {
-        //movimento da esfera no eixo x
+        //movimento da asteroide no eixo x
         switch (this.xDirecao) 
         {
-            //caso a esfera estiver se movimentando para esquerda
+            //caso a asteroide estiver se movimentando para esquerda
             case 'e' -> 
             {   
                 //se estiver na fase 2, indo para esquerda, pra cima e colidir embaixo da lua, 
                 if(this.fase == 2 && yDirecao == 'c' && colisaoLuaEmbaixo()) 
                 {
-                    //muda a direcao da esfera no eixo y
+                    //muda a direcao da asteroide no eixo y
                     mudaDirecaoY();
                 }
                 
-                //enquanto o movimento da esfera for maior que o limite da tela na esquerda
+                //enquanto o movimento da asteroide for maior que o limite da tela na esquerda
                 if (this.movEsferaX > -92*this.aspect) 
                 {
                     //decrementa o valor da variavel de mov no eixo x com a velocidade, que sera usada no translate
                     this.movEsferaX -= velocidadeJogo;
                 }
                 
-                //se o movimento da esfera atingir a parede da esquerda, 
+                //se o movimento da asteroide atingir a parede da esquerda,
                 if (this.movEsferaX == -92*this.aspect && this.xDirecao == 'e' || this.movEsferaX <= -92*this.aspect && this.xDirecao == 'e') 
                 {
-                    //muda a direção da esfera no eixo x
+                    //muda a direção da asteroide no eixo x
                     mudaDirecaoX();
                 }
             }//fim do case e
             
-            //caso a esfera estiver se movimentando para direita
+            //caso a asteroide estiver se movimentando para direita
             case 'd' -> 
             {
                 //se estiver na fase 2, indo para direita, para baixo e colidir com a lateral da lua,
@@ -674,7 +674,7 @@ public class Cena implements GLEventListener {
                     this.movEsferaX += velocidadeJogo;
                 }
                 
-                //se o movimento da esfera atingir a extremidade da parede da direita,
+                //se o movimento da asteroide atingir a extremidade da parede da direita,
                 if (this.movEsferaX == 92*this.aspect && this.xDirecao == 'd' || this.movEsferaX >= 92*this.aspect && this.xDirecao == 'd') 
                 {
                     //muda de posição
@@ -684,14 +684,14 @@ public class Cena implements GLEventListener {
             
         }//fim do switch x
         
-        //movimento da esfera no eixo y
+        //movimento da asteroide no eixo y
         switch (this.yDirecao) 
         {
-            //caso a esfera estiver indo para baixo
+            //caso a asteroide estiver indo para baixo
             case 'b' -> 
             {
                 
-                //se a esfera estiver na mesma altura que o skate e colidir com a ponta esquerda do skate
+                //se a asteroide estiver na mesma altura que o nave e colidir com a ponta esquerda do nave
                 if (this.movEsferaY <= -76*this.aspect && colisaoEsquerdaSkate()) 
                 {
                     //muda a direcao de y, de x e soma 20 na pontuacao
@@ -700,7 +700,7 @@ public class Cena implements GLEventListener {
                     pontuacao += 20;
                 }
                 
-                    //se a esfera estiver na mesma altura que o skate e colidir com a ponta direita
+                    //se a asteroide estiver na mesma altura que o nave e colidir com a ponta direita
                     else if (this.movEsferaY <= -76*this.aspect && colisaoDireitaSkate()) 
                     {
                         //muda a direcao de y, de x e soma 20 na pontuacao
@@ -709,7 +709,7 @@ public class Cena implements GLEventListener {
                         pontuacao += 20;
                     }
                 
-                    //se a esfera estiver na mesma altura que o skate e colidir com o meio
+                    //se a asteroide estiver na mesma altura que o nave e colidir com o meio
                     else if (this.movEsferaY <= -76*this.aspect && colisaoMeioSkate()) 
                     {
                         //muda a direcao de y e soma 20 na pontuacao
@@ -717,15 +717,15 @@ public class Cena implements GLEventListener {
                         pontuacao += 20;
                     }
                 
-                //se a esfera passar a altura do skate, logicamente ela nao colide
+                //se a asteroide passar a altura do nave, logicamente ela nao colide
                 else if (this.movEsferaY <= -90*this.aspect) 
                 {
-                    //o movimento da esfera reinicia e uma vida eh descontada
+                    //o movimento da asteroide reinicia e uma vida eh descontada
                     reset();
                     vidas--;
                 }
                 
-                //enquanto nenhuma colisão ocorre ou a esfera seja reiniciada,
+                //enquanto nenhuma colisão ocorre ou a asteroide seja reiniciada,
                 else 
                 {
                     //decrementa o valor da variavel de mov no eixo y com a velocidade, que sera usada no translate
