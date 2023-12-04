@@ -192,6 +192,8 @@ public class Cena implements GLEventListener {
             gl.glTranslatef(movEsferaX, movEsferaY, 0);
             esfera.draw(gl, glut);
         gl.glPopMatrix();
+
+        velocidadeJogo = 3.5f;
         
         //mini menu na tela
         miniMenu(gl, glut);
