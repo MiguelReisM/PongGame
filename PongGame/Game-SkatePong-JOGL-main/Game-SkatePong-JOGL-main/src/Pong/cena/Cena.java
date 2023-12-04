@@ -160,7 +160,7 @@ public class Cena implements GLEventListener {
         desenhaTexto2(gl, (int)(width/5.2), (int)(height/2.45), Color.WHITE, "- \" J \": Start do jogo.");
         desenhaTexto2(gl, (int)(width/5.2), (int)(height/2.58), Color.WHITE, "- \" F \": Fecha o jogo.");
         desenhaTexto1(gl, (int)(width/5.5), (int)(height/2.95), Color.GREEN, "- Aperte \" J \" para começar.");
-        desenhaTexto1(gl, (int)(width/2.8), (int)(height/2.95), Color.RED, " | \" F \" para sair.");
+        desenhaTexto1(gl, (int)(width/2.8), (int)(height/2.95), Color.RED, " - \" F \" para sair.");
 
         //se o usuário está no menu, ele tem 5 vidas e sua pontuação zerada
         vidas = 5;
@@ -292,7 +292,7 @@ public class Cena implements GLEventListener {
         }
         else 
         {
-            desenhaTexto(gl, (int)(width/2.30), (int)(height/1.67), Color.MAGENTA, "PAUSADO　こに");
+            desenhaTexto(gl, (int)(width/2.30), (int)(height/1.67), Color.MAGENTA, "Pausado");
             desenhaTexto1(gl, (int)(width/2.2), (int)(height/1.74), Color.GREEN, "Aperte P para voltar.");
         }
         
