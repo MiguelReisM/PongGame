@@ -6,7 +6,7 @@ import com.jogamp.newt.opengl.GLWindow;
 import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.util.FPSAnimator;
-import Pong.input.KeyBoard;
+import Pong.input.Teclas;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -34,7 +34,7 @@ public class Renderizar {
 
         window.addGLEventListener(jogo); //adiciona a Jogo a Janela
         //Habilita o teclado : jogo
-        window.addKeyListener(new KeyBoard(jogo));
+        window.addKeyListener(new Teclas(jogo));
 
         //window.requestFocus();
         FPSAnimator animator = new FPSAnimator(window, 60);

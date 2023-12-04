@@ -6,7 +6,7 @@ import static Pong.cena.Jogo.screenSize;
 import com.jogamp.newt.event.KeyEvent;
 import com.jogamp.newt.event.KeyListener;
 
-public class KeyBoard implements KeyListener{
+public class Teclas implements KeyListener{
     private Jogo jogo;
     
     private final int setaEsquerda = 149;
@@ -24,7 +24,7 @@ public class KeyBoard implements KeyListener{
     public double height = screenSize.getHeight();
     public float aspect = (float)(this.width/this.height);
     
-    public KeyBoard(Jogo jogo){
+    public Teclas(Jogo jogo){
         this.jogo = jogo;
     }
     
