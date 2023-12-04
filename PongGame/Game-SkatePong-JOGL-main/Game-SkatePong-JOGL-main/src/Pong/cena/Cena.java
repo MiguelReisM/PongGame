@@ -304,12 +304,7 @@ public class Cena implements GLEventListener {
     //mostra tela de fim de jogo, caso as vidas acabarem
     public void fimDoJogo(GL2 gl, GLUT glut)
     {
-        //desliga a luz ambiente
-        desligaLuz0(gl);
-        //liga a luz difusa
-        ligaLuz1(gl);
-        iluminacaoDifusa(gl);
-        
+
         //desenha o cenário 4
         gl.glPushMatrix();
             cenarios.drawCenario4(gl, glut);
